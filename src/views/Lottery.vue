@@ -1,0 +1,137 @@
+<script setup>
+import { lottery } from "@/api/lottery.js";
+import { ExperimentOutlined, CopyOutlined } from "@ant-design/icons-vue";
+
+import { message } from "ant-design-vue";
+
+const length = ref("10");
+const min = ref("0");
+const max = ref("20");
+const result = ref("");
+
+async function getLottery() {
+  const res = await lottery({
+    length: length.value,
+    min: min.value,
+    max: max.value,
+  });
+  result.value = res.data.lottery;
+}
+
+getLottery();
+
+function copy(text) {
+  if (window.clipboardData) {
+    window.clipboardData.setData("text", text);
+  } else {
+    document.oncopy = function (e) {
+      e.clipboardData.setData("text", text);
+      e.preventDefault();
+      document.oncopy = null;
+    };
+    document.execCommand("Copy", false, null);
+  }
+  message.success("复制成功");
+}
+</script>
+
+<template>
+  <div class="mainpage">
+    <h3>生成随机数</h3>
+    <a-space
+      class="site-input-group-wrapper"
+      direction="vertical"
+      size="middle"
+    >
+      长度：
+      <a-input v-model:value="length" allowClear></a-input>
+      范围：
+      <a-input-group compact>
+        <a-input
+          v-model:value="min"
+          style="width: 160px; text-align: center"
+          placeholder="Minimum"
+        />
+        <a-input
+          class="site-input-split"
+          style="width: 36px; border-left: 0; pointer-events: none"
+          placeholder="~"
+          disabled
+        />
+        <a-input
+          v-model:value="max"
+          class="site-input-right"
+          style="width: 160px; text-align: center"
+          placeholder="Maximum"
+        />
+      </a-input-group>
+      <a-button type="primary" @click="getLottery"
+        ><ExperimentOutlined />生成</a-button
+      >
+      结果：
+      <a-button
+        type="link"
+        @click="copy(result)"
+        :title="result"
+        class="result"
+      >
+        {{ result }}<CopyOutlined />
+      </a-button>
+    </a-space>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.mainpage {
+  width: 420px;
+  height: 420px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -210px;
+  margin-top: -210px;
+  color: #fff;
+  padding: 50px 30px;
+  background-color: rgb(165 116 116 / 9%);
+  border-radius: 10px;
+  font-size: 20px;
+
+  :deep(.result) {
+    span {
+      vertical-align: middle;
+      font-size: 22px;
+      color: #fff;
+      &:nth-child(1) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 300px;
+      }
+    }
+  }
+}
+.site-input-group-wrapper .site-input-split {
+  background-color: #fff;
+}
+
+.site-input-group-wrapper .site-input-right {
+  border-left-width: 0;
+}
+
+.site-input-group-wrapper .site-input-right:hover,
+.site-input-group-wrapper .site-input-right:focus {
+  border-left-width: 1px;
+}
+
+.site-input-group-wrapper .ant-input-rtl.site-input-right {
+  border-right-width: 0;
+}
+
+.site-input-group-wrapper .ant-input-rtl.site-input-right:hover,
+.site-input-group-wrapper .ant-input-rtl.site-input-right:focus {
+  border-right-width: 1px;
+}
+[data-theme="dark"] .site-input-group-wrapper .site-input-split {
+  background-color: transparent;
+}
+</style>
