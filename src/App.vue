@@ -1,9 +1,7 @@
-<script setup>
-import Lottery from "@/views/Lottery.vue";
-</script>
+<script setup></script>
 
 <template>
-  <Lottery></Lottery>
+  <router-view></router-view>
 </template>
 
 <style lang="scss">
