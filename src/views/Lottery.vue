@@ -2,7 +2,7 @@
 import { lottery } from "@/api/lottery.js";
 import { ExperimentOutlined, CopyOutlined } from "@ant-design/icons-vue";
 
-import { message } from "ant-design-vue";
+// import { message } from "ant-design-vue";
 
 const length = ref("10");
 const min = ref("0");
