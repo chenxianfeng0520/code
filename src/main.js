@@ -8,6 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import registerComponent from "@/components/index.js";
 
+import tailwindcss from 'tailwindcss'
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -17,5 +19,7 @@ const app = createApp(App);
 registerComponent(app);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
+app.use(tailwindcss);
+
 // app.use(Antd)
 app.mount("#app");
