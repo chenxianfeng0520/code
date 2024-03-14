@@ -27,14 +27,14 @@ function toPage(pagekey) {
       class="experiment animate__animated animate__bounceIn"
       @click="toPage(1)"
     >
-      <span>生成随机数</span>
+      <span>调用pyhon接口生成随机数</span>
     </a-card>
     <a-card
       :bordered="false"
       class="Docker animate__animated animate__bounceIn"
       @click="toPage(2)"
     >
-      <span>基于codemirror生成Dockerfile编辑器</span>
+      <span>基于vue-codemirror生成Dockerfile编辑器</span>
     </a-card>
   </div>
 </template>
