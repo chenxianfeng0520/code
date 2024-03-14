@@ -16,6 +16,7 @@ async function getLottery() {
     max: max.value,
   });
   result.value = res.data.lottery;
+  console.log(result.value, "res");
 }
 
 getLottery();
@@ -36,8 +37,8 @@ function copy(text) {
 </script>
 
 <template>
-  <div class="mainpage">
-    <h3>生成随机数</h3>
+  <div class="lottery-page animate__animated animate__backInDown">
+    <h3 class="title"><ExperimentOutlined />生成随机数</h3>
     <a-space
       class="site-input-group-wrapper"
       direction="vertical"
@@ -65,10 +66,7 @@ function copy(text) {
           placeholder="Maximum"
         />
       </a-input-group>
-      <a-button type="primary" @click="getLottery"
-        ><ExperimentOutlined />生成</a-button
-      >
-      结果：
+      <a-button type="primary" @click="getLottery">点击生成结果</a-button>
       <a-button
         type="link"
         @click="copy(result)"
@@ -82,7 +80,7 @@ function copy(text) {
 </template>
 
 <style lang="scss" scoped>
-.mainpage {
+.lottery-page {
   width: 420px;
   height: 420px;
   position: absolute;
@@ -90,11 +88,19 @@ function copy(text) {
   left: 50%;
   margin-left: -210px;
   margin-top: -210px;
-  color: #fff;
+  color: #ffffff;
   padding: 50px 30px;
-  background-color: rgb(165 116 116 / 9%);
+  background-color: rgb(201 138 138 / 13%);
   border-radius: 10px;
   font-size: 20px;
+  .title {
+    text-align: center;
+    span {
+      vertical-align: middle;
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
 
   :deep(.result) {
     span {
