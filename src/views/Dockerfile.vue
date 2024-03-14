@@ -6,6 +6,7 @@ import { dockerFile } from "@codemirror/legacy-modes/mode/dockerfile";
 
 const code = ref();
 const extensions = [StreamLanguage.define(dockerFile), oneDark];
+console.log(extensions,"extensions")
 </script>
 <template>
   <div class="docker-file-editor animate__animated animate__backInDown">
