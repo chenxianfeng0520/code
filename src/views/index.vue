@@ -16,14 +16,8 @@ function toLottery() {
   </div> -->
   <!-- <DownToTopTip></DownToTopTip> -->
   <div class="main-page">
-    <a-card :bordered="false" class="experiment" @click="toLottery">
+    <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toLottery">
       <span>生成随机数</span>
-    </a-card>
-    <a-card :bordered="false">
-      <span>Card content</span>
-    </a-card>
-    <a-card :bordered="false">
-      <span>Card content</span>
     </a-card>
   </div>
 </template>
