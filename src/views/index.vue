@@ -2,11 +2,17 @@
 import { useRouter } from "vue-router";
 // import DownToTopTip from "@/components/downToTopTip.vue"
 const router = useRouter();
-function toLottery() {
-  console.log(111111111111);
-  router.push({
-    path: "/lottery",
-  });
+function toPage(pagekey) {
+  if (pagekey == 1) {
+    router.push({
+      path: "/lottery",
+    });
+  }
+  if (pagekey == 2) {
+    router.push({
+      path: "/Dockerfile",
+    });
+  }
 }
 </script>
 <template>
@@ -16,8 +22,19 @@ function toLottery() {
   </div> -->
   <!-- <DownToTopTip></DownToTopTip> -->
   <div class="main-page">
-    <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toLottery">
+    <a-card
+      :bordered="false"
+      class="experiment animate__animated animate__bounceIn"
+      @click="toPage(1)"
+    >
       <span>生成随机数</span>
+    </a-card>
+    <a-card
+      :bordered="false"
+      class="Docker animate__animated animate__bounceIn"
+      @click="toPage(2)"
+    >
+      <span>基于codemirror生成Dockerfile编辑器</span>
     </a-card>
   </div>
 </template>
@@ -34,14 +51,18 @@ function toLottery() {
     line-height: 20px;
     color: #3a6cd0;
     :deep(.ant-card-body) {
-      padding: 32px 34px 34px 70px;
+      padding: 32px 14px 34px 72px;
     }
     &:hover {
       opacity: 0.9;
     }
   }
   .experiment {
-    background: 70% 45% / 15% 60% no-repeat url(@/assets/experiment.png),
+    background: 12px 28px / 50px 50px no-repeat url(@/assets/experiment.png),
+      #ffffff;
+  }
+  .Docker {
+    background: 12px 28px / 50px 50px no-repeat url(@/assets/Docker.png),
       #ffffff;
   }
 }

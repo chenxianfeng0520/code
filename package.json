@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@codemirror/legacy-modes": "^6.3.3",
+    "@codemirror/theme-one-dark": "^6.1.2",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
@@ -23,6 +26,7 @@
     "tailwindcss": "^3.4.1",
     "unplugin-auto-import": "^0.17.5",
     "vue": "^3.4.19",
+    "vue-codemirror": "^6.1.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
