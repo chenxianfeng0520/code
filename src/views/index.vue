@@ -13,11 +13,11 @@ function toPage(pagekey) {
       path: "/Dockerfile",
     });
   }
-  if (pagekey == 3) {
-    router.push({
-      path: "/MonacoEditor",
-    });
-  }
+  // if (pagekey == 3) {
+  //   router.push({
+  //     path: "/MonacoEditor",
+  //   });
+  // }
 }
 </script>
 <template>
@@ -41,13 +41,13 @@ function toPage(pagekey) {
     >
       <span>基于vue-codemirror生成Dockerfile编辑器</span>
     </a-card>
-    <a-card
+    <!-- <a-card
       :bordered="false"
       class="Docker animate__animated animate__bounceIn"
       @click="toPage(3)"
     >
       <span>基于monaco-editor生成Dockerfile编辑器</span>
-    </a-card>
+    </a-card> -->
   </div>
 </template>
 
