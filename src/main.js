@@ -7,18 +7,18 @@ import router from "./router/index.js";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import 'animate.css';
-// import registerComponent from "@/components/index.js";
+import registerComponent from "@/components/index.js";
 
 // import tailwindcss from 'tailwindcss'
 
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { faPhone } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-// library.add(faPhone);
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+library.add(faCheck);
 
 const app = createApp(App);
-// registerComponent(app);
-// app.component("font-awesome-icon", FontAwesomeIcon);
+registerComponent(app);
+app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
 // app.use(tailwindcss);
 

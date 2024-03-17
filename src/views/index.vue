@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
-// import DownToTopTip from "@/components/downToTopTip.vue"
+import DownToTopTip from "@/components/downToTopTip.vue"
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
@@ -21,11 +21,7 @@ function toPage(pagekey) {
 }
 </script>
 <template>
-  <!-- <h1>11111</h1> -->
-  <!-- <div class="main">
-    <a-button type="primary">弹窗</a-button>
-  </div> -->
-  <!-- <DownToTopTip></DownToTopTip> -->
+  <DownToTopTip></DownToTopTip>
   <div class="main-page">
     <a-card
       :bordered="false"
