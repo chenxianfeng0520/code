@@ -57,7 +57,7 @@ function toPage(pagekey) {
   .ant-card {
     font-size: 16px;
     line-height: 20px;
-    color: #3a6cd0;
+    color: #294d95;
     :deep(.ant-card-body) {
       padding: 32px 14px 34px 72px;
     }
