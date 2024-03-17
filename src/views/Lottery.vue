@@ -1,8 +1,8 @@
 <script setup>
 import { lottery } from "@/api/lottery.js";
-import { ExperimentOutlined, CopyOutlined } from "@ant-design/icons-vue";
-
-// import { message } from "ant-design-vue";
+import { CalculatorOutlined, CopyOutlined, SyncOutlined } from "@ant-design/icons-vue";
+import { h } from 'vue';
+import { message } from "ant-design-vue";
 
 const length = ref("10");
 const min = ref("0");
@@ -38,15 +38,18 @@ function copy(text) {
 
 <template>
   <div class="lottery-page animate__animated animate__backInDown">
-    <h3 class="title"><ExperimentOutlined />生成随机数</h3>
+    <h3 class="title">
+      <CalculatorOutlined />
+      <span>生成随机数</span>
+    </h3>
     <a-space
       class="site-input-group-wrapper"
       direction="vertical"
       size="middle"
     >
-      长度：
+      长度
       <a-input v-model:value="length" allowClear></a-input>
-      范围：
+      范围
       <a-input-group compact>
         <a-input
           v-model:value="min"
@@ -66,7 +69,7 @@ function copy(text) {
           placeholder="Maximum"
         />
       </a-input-group>
-      <a-button type="primary" @click="getLottery">点击生成结果</a-button>
+      <a-button type="primary" @click="getLottery" :icon="h(SyncOutlined)">点击生成结果</a-button>
       <a-button
         type="link"
         @click="copy(result)"
@@ -88,13 +91,14 @@ function copy(text) {
   left: 50%;
   margin-left: -210px;
   margin-top: -210px;
-  color: #ffffff;
+  color: #efffda;
   padding: 50px 30px;
-  background-color: rgb(201 138 138 / 13%);
-  border-radius: 10px;
+  background-color: rgb(46 109 123 / 68%);
+  border-radius: 30px;
   font-size: 20px;
   .title {
     text-align: center;
+    font-weight: 600;
     span {
       vertical-align: middle;
       display: inline-block;
@@ -105,14 +109,23 @@ function copy(text) {
   :deep(.result) {
     span {
       vertical-align: middle;
-      font-size: 22px;
-      color: #fff;
+      font-size: 27px;
+      color: #ffc107;
+      font-weight: 600;
       &:nth-child(1) {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         max-width: 300px;
       }
+      svg {
+        color: #15ff92;
+      }
+    }
+  }
+  :deep(.ant-btn) {
+    span {
+      vertical-align: middle;
     }
   }
 }
