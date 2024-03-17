@@ -1,7 +1,10 @@
-<script setup name="DownToTopTip"></script>
+<script setup name="DownToTopTip">
+import { CheckCircleOutlined } from "@ant-design/icons-vue";
+</script>
 <template>
   <div class="alert alert-success down-to-top-tip animate__animated animate__bounceInUp" role="alert">
-    <font-awesome-icon :icon="['fas', 'check']" /> 页面加载成功
+    <CheckCircleOutlined /> 
+    <span>页面加载成功</span>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -10,5 +13,13 @@
   position: fixed;
   left: 30px;
   bottom: 30px;
+  background-color: #45d995;
+  color: #000;
+  border-radius: 14px;
+  font-size: 18px;
+  span {
+    vertical-align: middle;
+    margin-right: 5px;
+  }
 }
 </style>
