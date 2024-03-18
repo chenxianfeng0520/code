@@ -1,5 +1,5 @@
 <script setup name="DownToTopTip">
-import { CheckCircleOutlined } from "@ant-design/icons-vue";
+import { CheckCircleFilled } from "@ant-design/icons-vue";
 const show = ref(false);
 setTimeout(() => {
   show.value = true;
@@ -15,8 +15,8 @@ setTimeout(() => {
     name="custom-classes"
   >
     <div class="alert alert-success down-to-top-tip" role="alert" v-if="show">
-      <CheckCircleOutlined />
-      <span>页面加载成功</span>
+      <CheckCircleFilled />
+      <span>页面已加载</span>
     </div>
   </Transition>
 </template>

@@ -19,7 +19,7 @@ async function getLottery() {
   console.log(result.value, "res");
 }
 
-getLottery();
+// getLottery();
 
 function copy(text) {
   if (window.clipboardData) {

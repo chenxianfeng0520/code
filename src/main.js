@@ -9,6 +9,9 @@ import "bootstrap";
 import 'animate.css';
 import registerComponent from "@/components/index.js";
 
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 // import tailwindcss from 'tailwindcss'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -17,6 +20,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 library.add(faCheck);
 
 const app = createApp(App);
+
+app.use(ElementPlus)
+
 registerComponent(app);
 app.component("font-awesome-icon", FontAwesomeIcon);
 app.use(router);
