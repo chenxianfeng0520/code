@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
-import DownToTopTip from "@/components/downToTopTip.vue";
+import DownToTopTip from "@/components/downToTopTip.vue"
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
@@ -8,7 +8,20 @@ function toPage(pagekey) {
       path: "/lottery",
     });
   }
+  if (pagekey == 2) {
+    router.push({
+      path: "/Dockerfile",
+    });
+  }
+  if (pagekey == 3) {
+    router.push({
+      path: "/MonacoEditor",
+    });
+  }
 }
+
+
+
 </script>
 <template>
   <DownToTopTip></DownToTopTip>
@@ -19,6 +32,20 @@ function toPage(pagekey) {
       @click="toPage(1)"
     >
       <span>调用pyhon接口生成随机数</span>
+    </a-card>
+    <a-card
+      :bordered="false"
+      class="Docker animate__animated animate__bounceIn"
+      @click="toPage(2)"
+    >
+      <span>基于vue-codemirror生成Dockerfile编辑器</span>
+    </a-card>
+    <a-card
+      :bordered="false"
+      class="Docker animate__animated animate__bounceIn"
+      @click="toPage(3)"
+    >
+      <span>基于monaco-editor生成Dockerfile编辑器</span>
     </a-card>
   </div>
 </template>
