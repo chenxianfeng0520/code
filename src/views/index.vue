@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
-import DownToTopTip from "@/components/downToTopTip.vue"
+import DownToTopTip from "@/components/downToTopTip.vue";
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
@@ -19,9 +19,6 @@ function toPage(pagekey) {
     });
   }
 }
-
-
-
 </script>
 <template>
   <DownToTopTip></DownToTopTip>
@@ -54,26 +51,25 @@ function toPage(pagekey) {
 .main-page {
   padding: 40px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(20% - 20px));
-  grid-column-gap: 40px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 25px));
+  grid-column-gap: 50px;
   cursor: pointer;
   .ant-card {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 22px;
     color: #294d95;
+    border-radius: 20px;
+    height: 110px;
     :deep(.ant-card-body) {
-      padding: 32px 14px 34px 72px;
-    }
-    &:hover {
-      opacity: 0.9;
+      padding: 30px 15px 0 90px;
     }
   }
   .experiment {
-    background: 12px 28px / 50px 50px no-repeat url(@/assets/experiment.png),
+    background: 15px 25px / 60px 60px no-repeat url(@/assets/experiment.png),
       #ffffff;
   }
   .Docker {
-    background: 12px 28px / 50px 50px no-repeat url(@/assets/Docker.png),
+    background: 15px 25px / 60px 60px no-repeat url(@/assets/Docker.png),
       #ffffff;
   }
 }
