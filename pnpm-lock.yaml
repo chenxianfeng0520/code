@@ -41,9 +41,6 @@ dependencies:
   bootstrap:
     specifier: ^5.3.3
     version: 5.3.3(@popperjs/core@2.11.8)
-  monaco-editor:
-    specifier: ^0.47.0
-    version: 0.47.0
   sass:
     specifier: ^1.71.1
     version: 1.72.0
@@ -1348,10 +1345,6 @@ packages:
       pathe: 1.1.2
       pkg-types: 1.0.3
       ufo: 1.5.1
-    dev: false
-
-  /monaco-editor@0.47.0:
-    resolution: {integrity: sha512-VabVvHvQ9QmMwXu4du008ZDuyLnHs9j7ThVFsiJoXSOQk18+LF89N4ADzPbFenm0W4V2bGHnFBztIRQTgBfxzw==}
     dev: false
 
   /mz@2.7.0:
