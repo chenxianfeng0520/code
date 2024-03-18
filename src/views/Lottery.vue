@@ -1,7 +1,11 @@
 <script setup>
 import { lottery } from "@/api/lottery.js";
-import { CalculatorOutlined, CopyOutlined, SyncOutlined } from "@ant-design/icons-vue";
-import { h } from 'vue';
+import {
+  CalculatorOutlined,
+  CopyOutlined,
+  SyncOutlined,
+} from "@ant-design/icons-vue";
+import { h } from "vue";
 import { message } from "ant-design-vue";
 
 const length = ref("10");
@@ -15,8 +19,9 @@ async function getLottery() {
     min: min.value,
     max: max.value,
   });
-  result.value = res.data.lottery;
-  console.log(result.value, "res");
+  setTimeout(() => {
+    result.value = res.data.lottery;
+  }, 5000);
 }
 
 // getLottery();
@@ -69,14 +74,21 @@ function copy(text) {
           placeholder="Maximum"
         />
       </a-input-group>
-      <a-button type="primary" @click="getLottery" :icon="h(SyncOutlined)">点击生成结果</a-button>
+      <a-button
+        type="primary"
+        @click="getLottery"
+        :icon="h(SyncOutlined)"
+        :disabled="result?.length"
+        >点击生成结果</a-button
+      >
       <a-button
         type="link"
         @click="copy(result)"
         :title="result"
         class="result"
       >
-        {{ result }}<CopyOutlined />
+        {{ result }}<CopyOutlined v-if="result?.length" />
+        <LoadingOutlined v-else />
       </a-button>
     </a-space>
   </div>
