@@ -20,14 +20,11 @@ function toPage(pagekey) {
   // }
 }
 
-const show = ref(true)
-setTimeout(()=>{
-  show.value = false;
-},4000)
+
 
 </script>
 <template>
-  <DownToTopTip v-if="show"></DownToTopTip>
+  <DownToTopTip></DownToTopTip>
   <div class="main-page">
     <a-card
       :bordered="false"

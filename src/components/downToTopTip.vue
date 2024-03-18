@@ -1,10 +1,21 @@
 <script setup name="DownToTopTip">
 import { CheckCircleOutlined } from "@ant-design/icons-vue";
+const show = ref(false);
+setTimeout(() => {
+  show.value = true;
+});
+setTimeout(() => {
+  show.value = false;
+}, 4000);
 </script>
 <template>
-  <Transition name="slide-fade">
-    <div class="alert alert-success down-to-top-tip" role="alert">
-      <CheckCircleOutlined /> 
+  <Transition
+    enter-active-class="animate__animated animate__bounceInUp"
+    leave-active-class="animate__animated animate__backOutDown"
+    name="custom-classes"
+  >
+    <div class="alert alert-success down-to-top-tip" role="alert" v-if="show">
+      <CheckCircleOutlined />
       <span>页面加载成功</span>
     </div>
   </Transition>
@@ -15,8 +26,8 @@ import { CheckCircleOutlined } from "@ant-design/icons-vue";
   position: fixed;
   left: 30px;
   bottom: 30px;
-  background-color: #198754;
-  color: #dee2e6;
+  background-color: #20a64e;
+  color: #ffffff;
   border-radius: 12px;
   font-size: 16px;
   border: none;
@@ -25,18 +36,5 @@ import { CheckCircleOutlined } from "@ant-design/icons-vue";
     vertical-align: middle;
     margin-right: 5px;
   }
-}
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
 }
 </style>
