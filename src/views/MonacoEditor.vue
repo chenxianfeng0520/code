@@ -1,4 +1,4 @@
-<!-- <script setup>
+<script setup>
 import * as monaco from "monaco-editor";
 
 const value = "";
@@ -27,4 +27,4 @@ onMounted(() => {
   margin-left: -410px;
   margin-top: -310px;
 }
-</style> -->
+</style>

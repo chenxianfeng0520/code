@@ -3,7 +3,7 @@ const routes = [
   { path: "/page", component: () => import("@/views/index.vue") },
   { path: "/lottery", component: () => import("@/views/Lottery.vue") },
   { path: "/Dockerfile", component: () => import("@/views/Dockerfile.vue") },
-  // { path: "/MonacoEditor", component: () => import("@/views/MonacoEditor.vue") },
+  { path: "/MonacoEditor", component: () => import("@/views/MonacoEditor.vue") },
   { path: "/", redirect: "/page" },
 ];
 const router = createRouter({
