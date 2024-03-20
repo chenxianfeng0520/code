@@ -19,9 +19,7 @@ async function getLottery() {
     min: min.value,
     max: max.value,
   });
-  setTimeout(() => {
-    result.value = res.data.lottery;
-  }, 5000);
+  result.value = res.data.lottery;
 }
 
 // getLottery();
@@ -74,11 +72,7 @@ function copy(text) {
           placeholder="Maximum"
         />
       </a-input-group>
-      <a-button
-        type="primary"
-        @click="getLottery"
-        :icon="h(SyncOutlined)"
-        :disabled="result?.length"
+      <a-button type="primary" @click="getLottery" :icon="h(SyncOutlined)"
         >点击生成结果</a-button
       >
       <a-button
