@@ -72,15 +72,15 @@ function theFormat(number) {
     <div class="lottery animate__animated animate__backInDown">
       <div class="mb-3 input-box">
         <label for="exampleInputEmail1" class="form-label">总个数</label>
-        <input type="number" class="form-control" />
+        <input type="number" class="form-control" v-model="length" />
       </div>
       <div class="mb-3 input-box">
         <label for="exampleInputEmail1" class="form-label">最小数</label>
-        <input type="number" class="form-control" />
+        <input type="number" class="form-control" v-model="min" />
       </div>
       <div class="mb-3 input-box">
         <label for="exampleInputEmail1" class="form-label">最大数</label>
-        <input type="number" class="form-control" />
+        <input type="number" class="form-control" v-model="max" />
       </div>
       <button type="button" class="btn btn-danger chouqian" @click="getLottery">
         <img src="@/assets/chouqian.png" alt="" />
