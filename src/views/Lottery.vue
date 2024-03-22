@@ -11,15 +11,18 @@ import { message } from "ant-design-vue";
 const length = ref("10");
 const min = ref("0");
 const max = ref("20");
-const result = ref("");
-
+const result = ref([]);
+const resultList = ref([]);
 async function getLottery() {
   const res = await lottery({
     length: length.value,
     min: min.value,
     max: max.value,
   });
-  result.value = res.data.lottery;
+  if (result.value?.length) {
+    resultList.value.push(result.value.join(" "));
+  }
+  result.value = res.data.lottery?.split(" ");
 }
 
 // getLottery();
@@ -37,126 +40,154 @@ function copy(text) {
   }
   message.success("复制成功");
 }
+
+const colorList = [
+  "border-primary",
+  "border-primary-subtle",
+  "border-secondary",
+  "border-secondary-subtle",
+  "border-success",
+  "border-success-subtle",
+  "border-danger",
+  "border-danger-subtle",
+  "border-warning",
+  "border-warning-subtle",
+  "border-info",
+  "border-info-subtle",
+  "border-light",
+  "border-light-subtle",
+  "border-dark",
+  "border-dark-subtle",
+  "border-black",
+  "border-white",
+];
+
+function theFormat(number) {
+  return number.toFixed(2);
+}
 </script>
 
 <template>
-  <div class="lottery-page animate__animated animate__backInDown">
-    <h3 class="title">
-      <CalculatorOutlined />
-      <span>生成随机数</span>
-    </h3>
-    <a-space
-      class="site-input-group-wrapper"
-      direction="vertical"
-      size="middle"
-    >
-      长度
-      <a-input v-model:value="length" allowClear></a-input>
-      范围
-      <a-input-group compact>
-        <a-input
-          v-model:value="min"
-          style="width: 160px; text-align: center"
-          placeholder="Minimum"
-        />
-        <a-input
-          class="site-input-split"
-          style="width: 36px; border-left: 0; pointer-events: none"
-          placeholder="~"
-          disabled
-        />
-        <a-input
-          v-model:value="max"
-          class="site-input-right"
-          style="width: 160px; text-align: center"
-          placeholder="Maximum"
-        />
-      </a-input-group>
-      <a-button type="primary" @click="getLottery" :icon="h(SyncOutlined)"
-        >点击生成结果</a-button
-      >
-      <a-button
-        type="link"
-        @click="copy(result)"
-        :title="result"
-        class="result"
-      >
-        {{ result }}<CopyOutlined v-if="result?.length" />
-        <LoadingOutlined v-else />
-      </a-button>
-    </a-space>
+  <div class="box center">
+    <div class="lottery animate__animated animate__backInDown">
+      <div class="mb-3 input-box">
+        <label for="exampleInputEmail1" class="form-label">总个数</label>
+        <input type="number" class="form-control" />
+      </div>
+      <div class="mb-3 input-box">
+        <label for="exampleInputEmail1" class="form-label">最小数</label>
+        <input type="number" class="form-control" />
+      </div>
+      <div class="mb-3 input-box">
+        <label for="exampleInputEmail1" class="form-label">最大数</label>
+        <input type="number" class="form-control" />
+      </div>
+      <button type="button" class="btn btn-danger chouqian" @click="getLottery">
+        <img src="@/assets/chouqian.png" alt="" />
+        <span>抽签</span>
+      </button>
+      <div class="flex-box-space-evenly">
+        <div
+          v-for="(item, index) in result"
+          :class="`result border ${colorList[index]} center`"
+        >
+          {{ item }}
+        </div>
+      </div>
+      <ul class="list-group list-box">
+        <li
+          class="list-group-item"
+          v-for="(item, index) in resultList"
+          :key="item"
+        >
+          <span class="badge text-bg-success">#{{ index + 1 }}</span>
+          <span>{{ item }}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.lottery-page {
-  width: 420px;
-  height: 420px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -210px;
-  margin-top: -210px;
-  color: #efffda;
-  padding: 50px 30px;
-  background-color: rgb(46 109 123 / 68%);
-  border-radius: 30px;
+.box {
+  height: 100vh;
+  width: 100vw;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.flex-box-space-evenly {
+  display: flex;
+  justify-content: space-evenly;
+}
+.lottery {
+  width: 800px;
+  height: 800px;
+  border-radius: 20px;
+  border: 1px solid #495057;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #2b3035cf;
+
+  .result {
+    width: 60px;
+    height: 60px;
+    color: #fff;
+    font-size: 40px;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+    border-radius: 4px;
+    margin-top: 30px;
+  }
+}
+.max-min {
+  max-width: 600px;
+}
+.input-group-text {
+  width: 80px;
+  justify-content: center;
+}
+.chouqian {
+  width: calc(100% - 30px);
+  height: 50px;
+  font-size: 23px;
+  margin-left: 15px;
+  margin-top: 30px;
+  img {
+    width: 40px;
+    height: 40px;
+    position: relative;
+    margin-bottom: -8px;
+    margin-left: -10px;
+  }
+}
+.input-box {
+  width: calc(100% - 40px);
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.form-label {
+  color: #fff;
   font-size: 20px;
-  .title {
-    text-align: center;
-    font-weight: 600;
-    span {
-      vertical-align: middle;
-      display: inline-block;
-      margin-right: 10px;
-    }
-  }
-
-  :deep(.result) {
-    span {
-      vertical-align: middle;
-      font-size: 27px;
-      color: #ffc107;
-      font-weight: 600;
-      &:nth-child(1) {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 300px;
-      }
-      svg {
-        color: #15ff92;
-      }
-    }
-  }
-  :deep(.ant-btn) {
-    span {
-      vertical-align: middle;
-    }
-  }
 }
-.site-input-group-wrapper .site-input-split {
-  background-color: #fff;
+.list-box {
+  margin-top: 30px;
+  width: calc(100% - 30px);
+  margin-left: 15px;
+  max-height: 240px;
+  overflow: auto;
 }
-
-.site-input-group-wrapper .site-input-right {
-  border-left-width: 0;
-}
-
-.site-input-group-wrapper .site-input-right:hover,
-.site-input-group-wrapper .site-input-right:focus {
-  border-left-width: 1px;
-}
-
-.site-input-group-wrapper .ant-input-rtl.site-input-right {
-  border-right-width: 0;
-}
-
-.site-input-group-wrapper .ant-input-rtl.site-input-right:hover,
-.site-input-group-wrapper .ant-input-rtl.site-input-right:focus {
-  border-right-width: 1px;
-}
-[data-theme="dark"] .site-input-group-wrapper .site-input-split {
+.list-group-item {
   background-color: transparent;
+  color: #fff;
+  span {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
 }
 </style>

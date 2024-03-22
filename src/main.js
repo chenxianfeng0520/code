@@ -4,8 +4,10 @@ import App from "./App.vue";
 import Antd from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
 import router from "./router/index.js";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap";
+
+import './scss/styles.scss'
+import * as bootstrap from 'bootstrap'
+
 import 'animate.css';
 import registerComponent from "@/components/index.js";
 
@@ -22,6 +24,7 @@ library.add(faCheck);
 const app = createApp(App);
 
 app.use(ElementPlus)
+app.use(bootstrap)
 
 registerComponent(app);
 app.component("font-awesome-icon", FontAwesomeIcon);
