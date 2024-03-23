@@ -42,7 +42,7 @@ function toPage(pagekey) {
     </a-card>
     <a-card
       :bordered="false"
-      class="Docker animate__animated animate__bounceIn"
+      class="Monaco animate__animated animate__bounceIn"
       @click="toPage(3)"
     >
       <span>基于monaco-editor生成Dockerfile编辑器</span>
@@ -52,27 +52,34 @@ function toPage(pagekey) {
 
 <style lang="scss" scoped>
 .main-page {
-  padding: 40px;
+  padding: 120px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 25px));
+  grid-template-columns: repeat(auto-fill, calc(20% - 25px));
   grid-column-gap: 50px;
   cursor: pointer;
   .ant-card {
     font-size: 16px;
     line-height: 22px;
-    color: #294d95;
-    border-radius: 20px;
-    height: 110px;
+    color: #4678dd;
+    border-radius: 16px;
+    height: 90px;
+    &:hover{
+      text-decoration: underline;
+    }
     :deep(.ant-card-body) {
-      padding: 30px 15px 0 90px;
+      padding: 20px 15px 0 100px;
     }
   }
   .experiment {
-    background: 15px 25px / 60px 60px no-repeat url(@/assets/experiment.png),
+    background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
       #ffffff;
   }
   .Docker {
-    background: 15px 25px / 60px 60px no-repeat url(@/assets/Docker.png),
+    background: 20px 15px / 60px 60px no-repeat url(@/assets/Docker.png),
+      #ffffff;
+  }
+  .Monaco {
+    background: 20px 15px / 60px 60px no-repeat url(@/assets/experiment.png),
       #ffffff;
   }
 }

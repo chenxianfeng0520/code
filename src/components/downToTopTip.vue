@@ -16,7 +16,7 @@ setTimeout(() => {
   >
     <div class="alert alert-success down-to-top-tip" role="alert" v-if="show">
       <CheckCircleFilled />
-      <span>已进入首页</span>
+      <span>欢迎欢迎</span>
     </div>
   </Transition>
 </template>
