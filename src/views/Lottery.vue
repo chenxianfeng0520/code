@@ -133,7 +133,7 @@ function theFormat(number) {
   border: 1px solid #495057;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #2b3035cf;
+  background-color: rgb(43 48 53 / 42%);
 
   .result {
     width: 60px;
@@ -143,6 +143,7 @@ function theFormat(number) {
     font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
       sans-serif;
     margin-top: 30px;
+    background-color: #a34b4b63;
   }
 }
 .max-min {

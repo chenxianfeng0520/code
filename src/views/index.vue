@@ -34,7 +34,7 @@ function toPage(pagekey) {
 
 </script>
 <template>
-  <DownToTopTip></DownToTopTip>
+  <DownToTopTip text="欢迎！"></DownToTopTip>
   <div class="main-page">
     <a-card
       :bordered="false"

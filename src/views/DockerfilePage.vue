@@ -1,13 +1,3 @@
-<script setup>
-import { Codemirror } from "vue-codemirror";
-import { StreamLanguage } from "@codemirror/language";
-import { oneDark } from "@codemirror/theme-one-dark";
-import { dockerFile } from "@codemirror/legacy-modes/mode/dockerfile";
-
-const code = ref();
-const extensions = [StreamLanguage.define(dockerFile), oneDark];
-
-</script>
 <template>
   <div class="docker-file-editor animate__animated animate__backInDown">
     <codemirror
@@ -20,6 +10,16 @@ const extensions = [StreamLanguage.define(dockerFile), oneDark];
     />
   </div>
 </template>
+<script setup>
+import { Codemirror } from "vue-codemirror";
+import { StreamLanguage } from "@codemirror/language";
+import { oneDark } from "@codemirror/theme-one-dark";
+import { dockerFile } from "@codemirror/legacy-modes/mode/dockerfile";
+
+const code = ref();
+const extensions = [StreamLanguage.define(dockerFile), oneDark];
+
+</script>
 <style lang="scss" scoped>
 .docker-file-editor {
   width: 820px;

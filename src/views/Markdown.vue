@@ -1,5 +1,6 @@
 <script setup>
 import * as monaco from "monaco-editor";
+import DownToTopTip from "@/components/downToTopTip.vue"
 import {
   EyeOutlined
 } from "@ant-design/icons-vue";
@@ -15,6 +16,7 @@ onMounted(() => {
 });
 </script>
 <template>
+  <DownToTopTip text="markdown"></DownToTopTip>
   <button type="button" class="btn btn-success yulang">
     <EyeOutlined /><span>预览</span>
   </button>

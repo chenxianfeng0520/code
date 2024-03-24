@@ -1,5 +1,11 @@
 <script setup name="DownToTopTip">
 import { CheckCircleFilled } from "@ant-design/icons-vue";
+
+
+const props = defineProps({
+    text:String,
+})
+
 const show = ref(false);
 setTimeout(() => {
   show.value = true;
@@ -16,7 +22,7 @@ setTimeout(() => {
   >
     <div class="alert alert-success down-to-top-tip" role="alert" v-if="show">
       <CheckCircleFilled />
-      <span>欢迎！</span>
+      <span>{{ text }}</span>
     </div>
   </Transition>
 </template>
