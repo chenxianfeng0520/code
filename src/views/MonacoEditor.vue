@@ -11,20 +11,25 @@ onMounted(() => {
     automaticLayout: true,
     theme: "vs-dark",
   });
-  nextTick(()=>{
-    editor.setModelLanguage(editor.getModel(), "javascript");
-  })
-
 });
 
-function changeLanguage(data){
-
-}
+// function changeLanguage(data) {}
 </script>
 <template>
-  <button type="button" class="btn btn-success yulang" @click="changeLanguage(data)">
-    <span>预览</span>
+  <!-- <button
+    type="button"
+    class="btn btn-success yulang"
+    @click="changeLanguage(data)"
+  >
+    <span>javascript</span>
   </button>
+  <button
+    type="button"
+    class="btn btn-success yulang"
+    @click="changeLanguage(data)"
+  >
+    <span>dockerfile</span>
+  </button> -->
   <div class="monaco-editor-editor animate__animated animate__backInDown">
     <div ref="containerRef" style="height: 100%; width: 100%"></div>
   </div>

@@ -11,7 +11,7 @@ import * as bootstrap from 'bootstrap'
 import 'animate.css';
 import registerComponent from "@/components/index.js";
 
-import ElementPlus from 'element-plus'
+// import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
 // import tailwindcss from 'tailwindcss'
@@ -23,7 +23,7 @@ library.add(faCheck);
 
 const app = createApp(App);
 
-app.use(ElementPlus)
+// app.use(ElementPlus)
 app.use(bootstrap)
 
 registerComponent(app);

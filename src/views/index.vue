@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router";
-import DownToTopTip from "@/components/downToTopTip.vue"
+import DownToTopTip from "@/components/downToTopTip.vue";
+import { PlusOutlined } from "@ant-design/icons-vue";
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
@@ -25,13 +26,10 @@ function toPage(pagekey) {
   }
   if (pagekey == 5) {
     router.push({
-      path: "/MonacoEditor",
+      path: "/lotteryOld",
     });
   }
 }
-
-
-
 </script>
 <template>
   <DownToTopTip text="欢迎！"></DownToTopTip>
@@ -41,7 +39,7 @@ function toPage(pagekey) {
       class="blog animate__animated animate__bounceIn"
       @click="toPage(4)"
     >
-      <span>我的博客</span>
+      <PlusOutlined />
     </a-card>
     <a-card
       :bordered="false"
@@ -49,6 +47,13 @@ function toPage(pagekey) {
       @click="toPage(1)"
     >
       <span>调用pyhon接口生成随机数</span>
+    </a-card>
+    <a-card
+      :bordered="false"
+      class="suiji animate__animated animate__bounceIn"
+      @click="toPage(5)"
+    >
+      <span>调用pyhon接口生成随机数（旧）</span>
     </a-card>
     <a-card
       :bordered="false"
@@ -64,20 +69,19 @@ function toPage(pagekey) {
     >
       <span>基于monaco-editor生成Dockerfile编辑器</span>
     </a-card>
-    <a-card
+    <!-- <a-card
       :bordered="false"
       class="markdown animate__animated animate__bounceIn"
       @click="toPage(4)"
     >
       <span>markdown语法编辑器和预览</span>
-    </a-card>
-
+    </a-card> -->
   </div>
 </template>
 
 <style lang="scss" scoped>
 .main-page {
-  padding: 120px 180px;
+  padding: 120px 160px;
   display: grid;
   grid-template-columns: repeat(auto-fill, calc(25% - 70px));
   grid-column-gap: 70px;
@@ -90,7 +94,7 @@ function toPage(pagekey) {
     height: 90px;
     font-family: sans-serif;
     margin-bottom: 60px;
-    &:hover{
+    &:hover {
       text-decoration: underline;
     }
     :deep(.ant-card-body) {
@@ -99,23 +103,31 @@ function toPage(pagekey) {
   }
   .experiment {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
-    #ffffff1a;
+      #ffffff1a;
+  }
+  .suiji {
+    background: 0px 10px / 110px 110px no-repeat url(@/assets/suiji.png),
+      #ffffff1a;
   }
   .Docker {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/Docker.png),
-    #ffffff1a;
+      #ffffff1a;
   }
   .Monaco {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/experiment.png),
-    #ffffff1a;
+      #ffffff1a;
   }
   .markdown {
     background: 0px 25px / 100px 70px no-repeat url(@/assets/markdown.png),
-    #ffffff1a;
+      #ffffff1a;
   }
   .blog {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
-    #ffffff1a;
+      #ffffff1a;
+    font-size: 36px;
+    line-height: 32px;
+    padding-left: 46px;
+    font-weight: 600;
   }
 }
 </style>
