@@ -1,6 +1,5 @@
 <script setup>
 import * as monaco from "monaco-editor";
-import { nextTick } from "vue";
 
 const value = "";
 const containerRef = ref();
@@ -11,6 +10,9 @@ onMounted(() => {
     automaticLayout: true,
     theme: "vs-dark",
   });
+  // nextTick(() => {
+  //   monaco.editor.setModelLanguage(monaco.editor.getModel(), "javascript");
+  // });
 });
 
 // function changeLanguage(data) {}

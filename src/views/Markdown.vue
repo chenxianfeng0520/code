@@ -1,7 +1,14 @@
 <script setup>
 import * as monaco from "monaco-editor";
 import DownToTopTip from "@/components/downToTopTip.vue";
-import { EyeOutlined, FormOutlined } from "@ant-design/icons-vue";
+import {
+  EyeOutlined,
+  FormOutlined,
+  TableOutlined,
+  PictureOutlined,
+  SaveOutlined,
+  EyeInvisibleOutlined,
+} from "@ant-design/icons-vue";
 import * as marked from "marked";
 import "github-markdown-css/github-markdown-light.css";
 
@@ -42,17 +49,31 @@ const markdownHtml = ref("");
 </script>
 <template>
   <DownToTopTip text="markdown"></DownToTopTip>
-  <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown" >
-    <span>表格</span>
+  <button
+    type="button"
+    class="btn btn-primary table-btn animate__animated animate__zoomInDown"
+  >
+    <TableOutlined />
   </button>
-  <button type="button" class="btn btn-primary pic-btn animate__animated animate__zoomInDown">
-    <span>图片</span>
+  <button
+    type="button"
+    class="btn btn-primary pic-btn animate__animated animate__zoomInDown"
+  >
+    <PictureOutlined />
   </button>
-  <button type="button" class="btn btn-primary editor-btn animate__animated animate__zoomInDown" @click="hidePage">
-    <span>隐藏/显示预览</span>
+  <button
+    type="button"
+    class="btn btn-primary editor-btn animate__animated animate__zoomInDown"
+    @click="hidePage"
+  >
+    <EyeOutlined v-if="!showPage" />
+    <EyeInvisibleOutlined v-else />
   </button>
-  <button type="button" class="btn btn-success yulang animate__animated animate__zoomInDown">
-    <span>保存</span>
+  <button
+    type="button"
+    class="btn btn-success yulang animate__animated animate__zoomInDown"
+  >
+    <SaveOutlined />
   </button>
   <div
     class="markdown-html animate__animated animate__bounceInUp"
@@ -123,7 +144,7 @@ const markdownHtml = ref("");
 
 .pic-btn {
   position: fixed;
-  right: 290px;
+  right: 190px;
   top: 20px;
   span {
     vertical-align: middle;
@@ -134,7 +155,7 @@ const markdownHtml = ref("");
 
 .table-btn {
   position: fixed;
-  right: 370px;
+  right: 240px;
   top: 20px;
   span {
     vertical-align: middle;
