@@ -12,7 +12,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+      "~bootstrap": path.resolve(__dirname, "node_modules/bootstrap"),
     },
   },
   server: {
@@ -20,6 +20,10 @@ export default defineConfig({
       "/api": {
         target: "http://60.204.208.146:8090",
         rewrite: (path) => path.replace(/\/api/, ""),
+      },
+      "/minio": {
+        target: "http://139.224.72.78:8888",
+        rewrite: (path) => path.replace(/\/minio/, ""),
       },
     },
   },

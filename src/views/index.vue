@@ -2,12 +2,12 @@
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
+
+
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
-    router.push({
-      path: "/lottery",
-    });
+    window.open("http://60.204.208.146/#/lottery", "_self");
   }
   if (pagekey == 2) {
     router.push({
@@ -25,15 +25,20 @@ function toPage(pagekey) {
     });
   }
   if (pagekey == 5) {
+    window.open("http://60.204.208.146/#/lotteryOld", "_self");
+  }
+  if (pagekey == 6) {
     router.push({
-      path: "/lotteryOld",
+      path: "/Minio",
     });
   }
 }
+
 </script>
 <template>
   <DownToTopTip text="欢迎！"></DownToTopTip>
   <div class="main-page">
+    <!-- <img :src="pic" alt="" /> -->
     <a-card
       :bordered="false"
       class="blog animate__animated animate__bounceIn"
@@ -69,13 +74,13 @@ function toPage(pagekey) {
     >
       <span>基于monaco-editor生成Dockerfile编辑器</span>
     </a-card>
-    <!-- <a-card
+    <a-card
       :bordered="false"
-      class="markdown animate__animated animate__bounceIn"
-      @click="toPage(4)"
+      class="minio animate__animated animate__bounceIn"
+      @click="toPage(6)"
     >
-      <span>markdown语法编辑器和预览</span>
-    </a-card> -->
+      <span>查看minio桶下文件</span>
+    </a-card>
   </div>
 </template>
 
@@ -128,6 +133,10 @@ function toPage(pagekey) {
     line-height: 32px;
     padding-left: 46px;
     font-weight: 600;
+  }
+  .minio {
+    background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
+      #ffffff1a;
   }
 }
 </style>

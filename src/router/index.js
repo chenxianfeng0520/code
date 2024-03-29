@@ -6,6 +6,7 @@ const routes = [
   { path: "/Dockerfile", component: () => import("@/views/DockerfilePage.vue") },
   { path: "/MonacoEditor", component: () => import("@/views/MonacoEditor.vue") },
   { path: "/Markdown", component: () => import("@/views/Markdown.vue") },
+  { path: "/Minio", component: () => import("@/views/Minio.vue") },
   { path: "/", redirect: "/page" },
 ];
 const router = createRouter({
