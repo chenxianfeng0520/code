@@ -3,7 +3,6 @@ import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
 import { PlusOutlined } from "@ant-design/icons-vue";
 
-
 const router = useRouter();
 function toPage(pagekey) {
   if (pagekey == 1) {
@@ -33,12 +32,10 @@ function toPage(pagekey) {
     });
   }
 }
-
 </script>
 <template>
   <DownToTopTip text="欢迎！"></DownToTopTip>
   <div class="main-page">
-    <!-- <img :src="pic" alt="" /> -->
     <a-card
       :bordered="false"
       class="blog animate__animated animate__bounceIn"
@@ -51,35 +48,38 @@ function toPage(pagekey) {
       class="experiment animate__animated animate__bounceIn"
       @click="toPage(1)"
     >
-      <span>调用pyhon接口生成随机数</span>
+      <span>生成随机数</span>
     </a-card>
     <a-card
       :bordered="false"
       class="suiji animate__animated animate__bounceIn"
       @click="toPage(5)"
     >
-      <span>调用pyhon接口生成随机数（旧）</span>
+      <span>生成随机数（旧）</span>
     </a-card>
     <a-card
       :bordered="false"
       class="Docker animate__animated animate__bounceIn"
       @click="toPage(2)"
     >
-      <span>基于vue-codemirror生成Dockerfile编辑器</span>
+      <span>vue-codemirror</span>
     </a-card>
     <a-card
       :bordered="false"
       class="Monaco animate__animated animate__bounceIn"
       @click="toPage(3)"
     >
-      <span>基于monaco-editor生成Dockerfile编辑器</span>
+      <span>monaco-editor</span>
     </a-card>
     <a-card
       :bordered="false"
       class="minio animate__animated animate__bounceIn"
       @click="toPage(6)"
     >
-      <span>查看minio桶下文件</span>
+      <span>查看minio中文件</span>
+    </a-card>
+    <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
+      <span>在线编辑excel文件</span>
     </a-card>
   </div>
 </template>
@@ -137,6 +137,10 @@ function toPage(pagekey) {
   .minio {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
       #ffffff1a;
+  }
+  .excel {
+    background: 0px 25px / 70px 70px no-repeat url(@/assets/excel.png),
+    #363030ad;
   }
 }
 </style>
