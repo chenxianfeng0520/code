@@ -32,7 +32,7 @@ onMounted(() => {
   >
     <span>dockerfile</span>
   </button> -->
-  <div class="monaco-editor-editor animate__animated animate__backInDown">
+  <div class="monaco-editor-editor animate__animated animate__slideInUp">
     <div ref="containerRef" style="height: 100%; width: 100%"></div>
   </div>
 </template>

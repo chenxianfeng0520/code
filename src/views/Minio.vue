@@ -9,7 +9,7 @@ getList().then((res) => {
   <div class="main-page">
     <a-card
       :bordered="false"
-      class="minio files animate__animated animate__bounceIn"
+      class="minio files animate__animated animate__zoomIn"
       :class="{ file: item.name, files: item.prefix }"
       v-for="item in list"
       >{{ item.name || item.prefix }}</a-card

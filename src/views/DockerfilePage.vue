@@ -1,5 +1,5 @@
 <template>
-  <div class="docker-file-editor animate__animated animate__backInDown">
+  <div class="docker-file-editor animate__animated animate__fadeInDown">
     <codemirror
       v-model="code"
       placeholder="Code gose here..."

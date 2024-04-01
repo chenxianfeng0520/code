@@ -40,7 +40,7 @@ function copy(text) {
 </script>
 
 <template>
-  <div class="lottery-page animate__animated animate__backInDown">
+  <div class="lottery-page animate__animated animate__slideInLeft">
     <h3 class="title">
       <CalculatorOutlined />
       <span>生成随机数</span>
