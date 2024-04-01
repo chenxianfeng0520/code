@@ -9,7 +9,8 @@ getList().then((res) => {
   <div class="main-page">
     <a-card
       :bordered="false"
-      class="minio animate__animated animate__bounceIn"
+      class="minio files animate__animated animate__bounceIn"
+      :class="{ file: item.name, files: item.prefix }"
       v-for="item in list"
       >{{ item.name || item.prefix }}</a-card
     >
@@ -19,27 +20,33 @@ getList().then((res) => {
 .main-page {
   padding: 120px 160px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 70px));
-  grid-column-gap: 70px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 50px));
+  grid-column-gap: 50px;
   cursor: pointer;
   .ant-card {
     font-size: 16px;
     line-height: 22px;
     color: #cedeff;
-    border-radius: 25px;
+    border-radius: 30px;
     height: 90px;
     font-family: sans-serif;
     margin-bottom: 60px;
-    &:hover {
-      text-decoration: underline;
-    }
+    // &:hover {
+    //   text-decoration: underline;
+    // }
     :deep(.ant-card-body) {
-      padding: 20px 15px 0 70px;
+      padding: 20px 15px 0 80px;
     }
   }
   .minio {
-    background: 15px 25px / 40px 40px no-repeat url(@/assets/files.png),
-      #ffffff1a;
+    &.files {
+      background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
+        #ffffff1a;
+    }
+    &.file {
+      background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
+        #ffffff1a;
+    }
   }
 }
 </style>
