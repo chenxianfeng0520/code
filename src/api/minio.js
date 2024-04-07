@@ -15,3 +15,11 @@ export function getList() {
     method: "get",
   });
 }
+
+export function deleteFileByName(params) {
+  return api({
+    url: "/minio/removeObject",
+    method: "get",
+    params
+  });
+}

@@ -76,7 +76,7 @@ function toPage(pagekey) {
       class="minio animate__animated animate__bounceIn"
       @click="toPage(6)"
     >
-      <span>查看minio中文件</span>
+      <span>minio中文件</span>
     </a-card>
     <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
       <span>在线编辑excel文件</span>
