@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
-import { PlusOutlined } from "@ant-design/icons-vue";
+import { BookOutlined } from "@ant-design/icons-vue";
 
 const router = useRouter();
 function toPage(pagekey) {
@@ -41,7 +41,7 @@ function toPage(pagekey) {
       class="blog animate__animated animate__bounceIn"
       @click="toPage(4)"
     >
-      <PlusOutlined />
+      <BookOutlined />
     </a-card>
     <a-card
       :bordered="false"
@@ -130,7 +130,7 @@ function toPage(pagekey) {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
       #ffffff1a;
     font-size: 36px;
-    line-height: 32px;
+    line-height: 36px;
     padding-left: 46px;
     font-weight: 600;
   }
@@ -140,7 +140,7 @@ function toPage(pagekey) {
   }
   .excel {
     background: 0px 25px / 70px 70px no-repeat url(@/assets/excel.png),
-    #363030ad;
+      #363030ad;
   }
 }
 </style>
