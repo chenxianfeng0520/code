@@ -1,6 +1,6 @@
 <script setup>
 import { getList, getFileByName, deleteFileByName } from "@/api/minio.js";
-import { addBlog,updateBlog } from "@/api/mysql.js";
+
 
 import { useRouter } from "vue-router";
 import {
@@ -72,10 +72,7 @@ function changeType() {
   cardType.value = cardType.value ? 0 : 1;
 }
 
-updateBlog({
-  id:2,
-  name:'22222'
-})
+
 </script>
 <template>
   <a-upload

@@ -16,3 +16,18 @@ export function updateBlog(data) {
   });
 }
 
+
+export function getBlog() {
+  return api({
+    url: "/mysql/getBlog",
+    method: "get",
+  });
+}
+
+export function getBlogById(params) {
+  return api({
+    url: "/mysql/getBlogById",
+    method: "get",
+    params
+  });
+}
