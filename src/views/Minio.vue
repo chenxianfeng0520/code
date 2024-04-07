@@ -5,14 +5,15 @@ import {
   EyeOutlined,
   CloudOutlined,
   RetweetOutlined,
-  DeleteOutlined,
+  ClearOutlined,
   CloudDownloadOutlined,
+  InsertRowAboveOutlined,
 } from "@ant-design/icons-vue";
 const router = useRouter();
 const list = ref([]);
 const loading = ref(false);
 async function getFileList() {
-  loading.value = true;
+  // loading.value = true;
   const res = await getList();
   list.value = res.data.data;
   loading.value = false;
@@ -62,6 +63,12 @@ const headers = {
 function getConent(item) {
   return item.name || item.prefix?.split("/")?.[0];
 }
+
+const cardType = ref(0);
+
+function changeType() {
+  cardType.value = cardType.value ? 0 : 1;
+}
 </script>
 <template>
   <a-upload
@@ -76,6 +83,14 @@ function getConent(item) {
       <span>新增文件</span>
     </a-button>
   </a-upload>
+  <a-button
+    type="primary"
+    class="preview animate__animated animate__zoomIn"
+    @click="changeType"
+  >
+    <InsertRowAboveOutlined />
+    <span>切换视图</span>
+  </a-button>
   <a-button
     type="primary"
     class="seePic animate__animated animate__zoomIn"
@@ -102,7 +117,7 @@ function getConent(item) {
     v-show="active"
   >
     <a-button type="primary">
-      <RetweetOutlined />
+      <CloudOutlined />
       <span>替换</span>
     </a-button>
   </a-upload>
@@ -113,13 +128,27 @@ function getConent(item) {
     v-show="active"
     @click.stop="deleteInfo"
   >
-    <DeleteOutlined />
+    <ClearOutlined />
     <span>删除</span>
   </a-button>
   <div class="main-page">
     <a-spin tip="minio列表加载中" v-if="loading" />
     <template v-else>
+      <a-image
+        v-for="item in list"
+        class="minio_pic animate__animated animate__zoomIn"
+        :src="`http://139.224.72.78:9000/picturegallery/${getConent(
+          item
+        )}?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200`"
+        @click="onClickInfo(item)"
+        :class="{
+          active: active == getConent(item),
+        }"
+        :preview="false"
+        v-if="cardType"
+      />
       <a-card
+        v-else
         :bordered="false"
         class="minio files animate__animated animate__zoomIn"
         :class="{
@@ -169,13 +198,25 @@ function getConent(item) {
       }
     }
   }
+  :deep(.ant-image) {
+    .minio_pic {
+      max-width: 80%;
+      max-height: 80%;
+      &.active {
+        border: 2px solid #fff;
+        border-radius: 20px;
+      }
+    }
+  }
+
   .minio {
     &.files {
       background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
         #ffffff1a;
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
-          rgb(141 116 116 / 10%);
+          #5853531a;
+        color: #8b9ab9;
       }
     }
     &.file {
@@ -183,10 +224,16 @@ function getConent(item) {
         #ffffff1a;
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
-          rgb(141 116 116 / 10%);
+          #5853531a;
+        color: #8b9ab9;
       }
     }
   }
+}
+.preview {
+  position: fixed;
+  left: 550px;
+  top: 30px;
 }
 .seePic {
   position: fixed;
