@@ -25,6 +25,11 @@ export default defineConfig({
         target: "http://139.224.72.78:8888",
         rewrite: (path) => path.replace(/\/minio/, ""),
       },
+      "/mysql": {
+        target: "http://139.224.72.78:9999",
+        rewrite: (path) => path.replace(/\/mysql/, ""),
+      },
+      
     },
   },
 });

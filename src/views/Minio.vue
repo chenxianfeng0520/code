@@ -1,5 +1,7 @@
 <script setup>
 import { getList, getFileByName, deleteFileByName } from "@/api/minio.js";
+import { addBlog,updateBlog } from "@/api/mysql.js";
+
 import { useRouter } from "vue-router";
 import {
   EyeOutlined,
@@ -69,11 +71,16 @@ const cardType = ref(0);
 function changeType() {
   cardType.value = cardType.value ? 0 : 1;
 }
+
+updateBlog({
+  id:2,
+  name:'22222'
+})
 </script>
 <template>
   <a-upload
     name="file"
-    :action="`http://localhost:5173/minio/uploadObject`"
+    :action="`http://139.224.72.78/minio/uploadObject`"
     :headers="headers"
     @change="handleChange"
     class="uploadPic animate__animated animate__zoomIn"
@@ -110,7 +117,7 @@ function changeType() {
   </a-button> -->
   <a-upload
     name="file"
-    :action="`http://localhost:5173/minio/uploadObject?name=${active}`"
+    :action="`http://139.224.72.78/minio/uploadObject?name=${active}`"
     :headers="headers"
     @change="handleChange"
     class="changePic animate__animated animate__zoomIn"
