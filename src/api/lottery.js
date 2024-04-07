@@ -8,18 +8,4 @@ export function lottery(params) {
   });
 }
 
-export function getFileByName() {
-  return api({
-    url: "/minio/getFileByName",
-    method: "get",
-    // responseType: "blob",
-  });
-}
-
-export function getList() {
-  return api({
-    url: "/minio/getList",
-    method: "get",
-  });
-}
 

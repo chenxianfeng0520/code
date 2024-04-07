@@ -1,9 +1,24 @@
 <script setup>
-import { getList } from "@/api/lottery.js";
+import { getList, getFileByName } from "@/api/minio.js";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const list = ref([]);
 getList().then((res) => {
   list.value = res.data.data;
 });
+
+function getInfo(item) {
+  if (item.prefix) {
+    return false;
+  } else {
+    router.push({
+      path: "/MinioInfo",
+      query: {
+        name: item.name,
+      },
+    });
+  }
+}
 </script>
 <template>
   <div class="main-page">
@@ -11,8 +26,9 @@ getList().then((res) => {
       :bordered="false"
       class="minio files animate__animated animate__zoomIn"
       :class="{ file: item.name, files: item.prefix }"
+      @click="getInfo(item)"
       v-for="item in list"
-      >{{ item.name || item.prefix }}</a-card
+      >{{ item.name || item.prefix?.split("/")?.[0] }}</a-card
     >
   </div>
 </template>
@@ -31,9 +47,9 @@ getList().then((res) => {
     height: 90px;
     font-family: sans-serif;
     margin-bottom: 60px;
-    // &:hover {
-    //   text-decoration: underline;
-    // }
+    &:hover {
+      text-decoration: underline;
+    }
     :deep(.ant-card-body) {
       padding: 20px 15px 0 80px;
     }
