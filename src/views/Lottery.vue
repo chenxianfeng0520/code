@@ -130,10 +130,10 @@ function theFormat(number) {
   width: 800px;
   height: 800px;
   border-radius: 20px;
-  border: 1px solid #495057;
+  // border: 1px solid #495057;
   padding: 20px;
   box-sizing: border-box;
-  background-color: rgb(43 48 53 / 42%);
+  background-color: #111d28b3;
 
   .result {
     width: 60px;

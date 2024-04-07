@@ -54,27 +54,27 @@ getBlogList()
   <DownToTopTip text="欢迎！"></DownToTopTip>
   <div class="main-page">
     <a-card :bordered="false" class="blog animate__animated animate__bounceIn" @click="toPage(4)">
-      <BookOutlined />
+      <span>新增博客</span>
     </a-card>
     <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toPage(1)">
       <span>生成随机数</span>
     </a-card>
-    <a-card :bordered="false" class="suiji animate__animated animate__bounceIn" @click="toPage(5)">
+    <!-- <a-card :bordered="false" class="suiji animate__animated animate__bounceIn" @click="toPage(5)">
       <span>生成随机数（旧）</span>
-    </a-card>
-    <a-card :bordered="false" class="Docker animate__animated animate__bounceIn" @click="toPage(2)">
+    </a-card> -->
+    <!-- <a-card :bordered="false" class="Docker animate__animated animate__bounceIn" @click="toPage(2)">
       <span>vue-codemirror</span>
     </a-card>
     <a-card :bordered="false" class="Monaco animate__animated animate__bounceIn" @click="toPage(3)">
       <span>monaco-editor</span>
-    </a-card>
+    </a-card> -->
     <a-card :bordered="false" class="minio animate__animated animate__bounceIn" @click="toPage(6)">
       <span>minio中文件</span>
     </a-card>
-    <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
+    <!-- <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
       <span>在线编辑excel文件</span>
-    </a-card>
-    <a-card :bordered="false" class="markdown animate__animated animate__bounceIn" v-for="item in blogList"
+    </a-card> -->
+    <a-card :bordered="false" class="blogging animate__animated animate__bounceIn" v-for="item in blogList"
       @click="toPage(7, item)">
       <span>{{ item.name }}</span>
     </a-card>
@@ -85,15 +85,15 @@ getBlogList()
 .main-page {
   padding: 120px 160px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 70px));
-  grid-column-gap: 70px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 50px));
+  grid-column-gap: 50px;
   cursor: pointer;
 
   .ant-card {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 22px;
-    color: #cedeff;
-    border-radius: 25px;
+    color: #d8dfee;
+    border-radius: 20px;
     height: 90px;
     font-family: sans-serif;
     margin-bottom: 60px;
@@ -109,41 +109,46 @@ getBlogList()
 
   .experiment {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
-      #ffffff1a;
+      #2c2b2ba8;
   }
 
   .suiji {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/suiji.png),
-      #ffffff1a;
+      #2c2b2ba8;
   }
 
   .Docker {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/Docker.png),
-      #ffffff1a;
+      #2c2b2ba8;
   }
 
   .Monaco {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/experiment.png),
-      #ffffff1a;
+      #2c2b2ba8;
   }
 
   .markdown {
     background: 0px 25px / 100px 70px no-repeat url(@/assets/markdown.png),
-      #ffffff1a;
+      #2c2b2ba8;
+  }
+
+  .blogging {
+    background: 0px 25px / 70px 70px no-repeat url(@/assets/blogging.png),
+      #2c2b2ba8;
   }
 
   .blog {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
-      #ffffff1a;
-    font-size: 36px;
-    line-height: 36px;
-    padding-left: 46px;
-    font-weight: 600;
+      #2c2b2ba8;
+    // font-size: 36px;
+    // line-height: 36px;
+    // padding-left: 46px;  
+    // font-weight: 600;
   }
 
   .minio {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
-      #ffffff1a;
+      #2c2b2ba8;
   }
 
   .excel {

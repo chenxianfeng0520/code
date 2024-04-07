@@ -1,7 +1,7 @@
 <script setup>
 import * as monaco from "monaco-editor";
 import DownToTopTip from "@/components/downToTopTip.vue";
-import { addBlog, updateBlog,getBlogById } from "@/api/mysql.js";
+import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
 import {
   EyeOutlined,
   FormOutlined,
@@ -52,6 +52,7 @@ onMounted(async () => {
     automaticLayout: true,
     theme: "vs-dark",
   });
+  markdownHtml.value = marked.marked(initInfo.value || value);
   editor.onDidChangeModelContent(() => {
     markdownHtml.value = marked.marked(editor.getValue());
   });
@@ -67,15 +68,15 @@ const markdownHtml = ref("");
 function onAddBlog() {
   if (route.query.id) {
     updateBlog({
-    name: title.value,
-    content_text: editor.getValue(),
-    id: route.query.id
-  })
+      name: title.value,
+      content_text: editor.getValue(),
+      id: route.query.id
+    })
   } else {
     addBlog({
-    name: title.value,
-    content_text: editor.getValue()
-  })
+      name: title.value,
+      content_text: editor.getValue()
+    })
   }
 
 }
@@ -83,20 +84,29 @@ function onAddBlog() {
 
 </script>
 <template>
-  <a-input class="title" v-model:value="title" placeholder="请输入标题" ></a-input>
+  <a-input class="title" v-model:value="title" placeholder="请输入标题"></a-input>
   <DownToTopTip text="markdown"></DownToTopTip>
-  <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown">
+  <!-- <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown">
     <TableOutlined />
   </button>
   <button type="button" class="btn btn-primary pic-btn animate__animated animate__zoomInDown">
     <PictureOutlined />
-  </button>
+  </button> -->
   <button type="button" class="btn btn-primary editor-btn animate__animated animate__zoomInDown" @click="hidePage">
-    <EyeOutlined v-if="!showPage" />
-    <EyeInvisibleOutlined v-else />
+    <template v-if="!showPage">
+      <EyeOutlined />
+      <span>显示预览</span>
+    </template>
+
+    <template v-else>
+      <EyeInvisibleOutlined />
+      <span>隐藏预览</span>
+    </template>
+
   </button>
   <button type="button" class="btn btn-success yulang animate__animated animate__zoomInDown" @click="onAddBlog">
     <SaveOutlined />
+    <span>保存</span>
   </button>
   <div class="markdown-html animate__animated animate__bounceInUp" v-show="showPage">
     <div v-html="markdownHtml" class="markdown-body"></div>
@@ -123,7 +133,7 @@ function onAddBlog() {
 
 .title {
   position: fixed;
-  right: 320px;
+  right: 310px;
   top: 20px;
   width: 700px;
   height: 38px;
@@ -151,7 +161,7 @@ function onAddBlog() {
 
 .yulang {
   position: fixed;
-  right: 60px;
+  right: 190px;
   top: 20px;
 
   span {
@@ -163,7 +173,7 @@ function onAddBlog() {
 
 .editor-btn {
   position: fixed;
-  right: 140px;
+  right: 60px;
   top: 20px;
 
   span {
