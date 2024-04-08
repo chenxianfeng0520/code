@@ -6,7 +6,9 @@ import { getBlog } from "@/api/mysql.js";
 const router = useRouter();
 function toPage(pagekey, item) {
   if (pagekey == 1) {
-    window.open("http://60.204.208.146/#/lottery", "_self");
+    router.push({
+      path: "/lottery",
+    });
   }
   if (pagekey == 2) {
     router.push({
@@ -24,7 +26,9 @@ function toPage(pagekey, item) {
     });
   }
   if (pagekey == 5) {
-    window.open("http://60.204.208.146/#/lotteryOld", "_self");
+    router.push({
+      path: "/lotteryOld",
+    });
   }
   if (pagekey == 6) {
     router.push({
@@ -35,20 +39,19 @@ function toPage(pagekey, item) {
     router.push({
       path: "/Markdown",
       query: {
-        id: item.id
-      }
+        id: item.id,
+      },
     });
   }
 }
 
-
-const blogList = ref([])
+const blogList = ref([]);
 async function getBlogList() {
-  const res = await getBlog()
-  blogList.value = res.data.data || []
+  const res = await getBlog();
+  blogList.value = res.data.data || [];
 }
 
-getBlogList()
+getBlogList();
 
 function toBack() {
   router.push({
@@ -60,10 +63,18 @@ function toBack() {
   <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
   <DownToTopTip text="切换后台成功"></DownToTopTip>
   <div class="main-page">
-    <a-card :bordered="false" class="blog animate__animated animate__bounceIn" @click="toPage(4)">
+    <a-card
+      :bordered="false"
+      class="blog animate__animated animate__bounceIn"
+      @click="toPage(4)"
+    >
       <span>新增博客</span>
     </a-card>
-    <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toPage(1)">
+    <a-card
+      :bordered="false"
+      class="experiment animate__animated animate__bounceIn"
+      @click="toPage(1)"
+    >
       <span>生成随机数</span>
     </a-card>
     <!-- <a-card :bordered="false" class="suiji animate__animated animate__bounceIn" @click="toPage(5)">
@@ -75,14 +86,22 @@ function toBack() {
     <a-card :bordered="false" class="Monaco animate__animated animate__bounceIn" @click="toPage(3)">
       <span>monaco-editor</span>
     </a-card> -->
-    <a-card :bordered="false" class="minio animate__animated animate__bounceIn" @click="toPage(6)">
+    <a-card
+      :bordered="false"
+      class="minio animate__animated animate__bounceIn"
+      @click="toPage(6)"
+    >
       <span>minio中文件</span>
     </a-card>
     <!-- <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
       <span>在线编辑excel文件</span>
     </a-card> -->
-    <a-card :bordered="false" class="blogging animate__animated animate__bounceIn" v-for="item in blogList"
-      @click="toPage(7, item)">
+    <a-card
+      :bordered="false"
+      class="blogging animate__animated animate__bounceIn"
+      v-for="item in blogList"
+      @click="toPage(7, item)"
+    >
       <span>{{ item.name }}</span>
     </a-card>
   </div>
@@ -156,7 +175,7 @@ function toBack() {
       #2c2b2ba8;
     // font-size: 36px;
     // line-height: 36px;
-    // padding-left: 46px;  
+    // padding-left: 46px;
     // font-weight: 600;
   }
 
