@@ -2,7 +2,8 @@
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
 import { BookOutlined } from "@ant-design/icons-vue";
-import { getBlog } from "@/api/mysql.js";
+import { getBlog, deleteBlog } from "@/api/mysql.js";
+import { message } from "ant-design-vue";
 const router = useRouter();
 function toPage(pagekey, item) {
   if (pagekey == 1) {
@@ -58,6 +59,14 @@ function toBack() {
     path: "/blog",
   });
 }
+
+async function onDelete(item) {
+  await deleteBlog({
+    id: item.id,
+  });
+  getBlogList();
+  message.success('博客删除成功');
+}
 </script>
 <template>
   <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
@@ -103,6 +112,9 @@ function toBack() {
       @click="toPage(7, item)"
     >
       <span>{{ item.name }}</span>
+      <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
+        >- 删除 -</a-button
+      >
     </a-card>
   </div>
 </template>
@@ -168,6 +180,12 @@ function toBack() {
   .blogging {
     background: 0px 25px / 70px 70px no-repeat url(@/assets/blogging.png),
       #2c2b2ba8;
+    span {
+      display: block;
+    }
+    .delete {
+      padding-left: 0px;
+    }
   }
 
   .blog {

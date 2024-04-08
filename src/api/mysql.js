@@ -31,3 +31,11 @@ export function getBlogById(params) {
     params
   });
 }
+
+export function deleteBlog(params) {
+  return api({
+    url: "/mysql/deleteBlog",
+    method: "get",
+    params
+  });
+}

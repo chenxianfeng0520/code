@@ -49,10 +49,15 @@ onMounted(() => {
 </script>
 <template>
   <div class="markdown-html animate__animated animate__bounceIn">
-    <h1 class="title">{{ title }}</h1>
+    <h1 class="title">
+      <img src="@/assets/blogging.png" alt="" />
+      <span>{{ title }}</span>
+    </h1>
     <div class="tagList">
-      <a-tag color="#108ee9">#ES6</a-tag>
+      <a-button type="link" class="tag">#ES6</a-button>
+      <a-button type="link" class="tag">#ES6</a-button>
     </div>
+    <a-divider />
     <div v-html="markdownHtml" class="markdown-body"></div>
   </div>
 </template>
@@ -60,9 +65,9 @@ onMounted(() => {
 .markdown-html {
   width: 1100px;
   margin: auto;
-  margin-top: 2%;
-  height: 93%;
-  border-radius: 8px;
+  margin-top: 20px;
+  min-height: calc(100% - 20px);
+  border-radius: 2px;
   overflow: hidden;
   padding: 10px;
   box-sizing: border-box;
@@ -75,10 +80,21 @@ onMounted(() => {
     font-weight: 600;
     word-break: break-all;
     word-wrap: break-word;
+    img {
+      width: 30px;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    span {
+      vertical-align: middle;
+    }
   }
   .tagList {
-    margin-bottom: 20px;
-    padding: 0 0;
+    padding: 0 10px;
+    .tag {
+      padding-left: 0px;
+      color: #108ee9;
+    }
   }
 }
 </style>

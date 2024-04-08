@@ -34,10 +34,11 @@ getBlogList();
       v-for="item in blogList"
       @click="toPage(item)"
     >
-      <span class="title">{{ item.name || '-#-' }}</span>
+      <div class="title">{{ item.name || "-#-" }}</div>
       <a-button class="tag" type="link">#javaScript</a-button>
       <a-button class="tag" type="link">#python</a-button>
       <a-button class="tag" type="link">#ES6</a-button>
+      <div class="desc">{{ item.name }}22222222222222222</div>
     </a-card>
   </div>
 </template>
@@ -51,24 +52,20 @@ getBlogList();
   cursor: pointer;
 }
 .main-page {
-  padding: 80px 80px;
+  padding: 80px 70px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 35px));
-  grid-column-gap: 35px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 50px));
+  grid-column-gap: 50px;
   cursor: pointer;
 
   .ant-card {
     font-size: 18px;
     line-height: 22px;
     color: #ff8484;
-    border-radius: 10px;
-    height: 90px;
+    border-radius: 30px;
+    height: 115px;
     font-family: sans-serif;
     margin-bottom: 60px;
-
-    &:hover {
-      text-decoration: underline;
-    }
 
     :deep(.ant-card-body) {
       padding: 20px 15px 0 90px;
@@ -76,19 +73,30 @@ getBlogList();
   }
 
   .blogging {
-    background: 10px 12px / 70px 70px no-repeat url(@/assets/blogging.png),
-    #4c4444a8;
+    background: 10px 20px / 70px 70px no-repeat url(@/assets/blogging.png),
+    #5282a369;
     .title {
-      vertical-align: middle;
-      display: inline-block;
+      display: block;
       width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      &:hover {
+        text-decoration: underline;
+      }
     }
     .tag {
       padding-left: 0px;
-      color: #108ee9;
+      color: #87d068;
+    }
+    .desc {
+      font-size: 15px;
+      color: #607d92;
+      font-style: italic;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }
