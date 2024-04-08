@@ -1,7 +1,6 @@
 <script setup>
 import { getList, getFileByName, deleteFileByName } from "@/api/minio.js";
 
-
 import { useRouter } from "vue-router";
 import {
   EyeOutlined,
@@ -71,8 +70,6 @@ const cardType = ref(0);
 function changeType() {
   cardType.value = cardType.value ? 0 : 1;
 }
-
-
 </script>
 <template>
   <a-upload
@@ -135,7 +132,7 @@ function changeType() {
     <ClearOutlined />
     <span>删除</span>
   </a-button>
-  <div class="main-page">
+  <div class="main-page" :class="{ pre_page: cardType }">
     <a-spin tip="minio列表加载中" v-if="loading" />
     <template v-else>
       <a-image
@@ -177,6 +174,11 @@ function changeType() {
   grid-template-columns: repeat(auto-fill, calc(25% - 20px));
   grid-column-gap: 20px;
   cursor: pointer;
+  &.pre_page {
+    grid-template-columns: repeat(auto-fill, calc(12.5% - 15px));
+    grid-column-gap: 15px;
+    padding: 120px 80px;
+  }
   .ant-card {
     font-size: 16px;
     line-height: 22px;
@@ -204,8 +206,10 @@ function changeType() {
   }
   :deep(.ant-image) {
     .minio_pic {
-      max-width: 80%;
-      max-height: 80%;
+      max-width: 70%;
+      width: auto;
+      height: 70%;
+      max-height: 70%;
       &.active {
         border: 2px solid #fff;
         border-radius: 20px;

@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 const routes = [
-  { path: "/page", component: () => import("@/views/index.vue") },
+  { path: "/back", component: () => import("@/views/index.vue") },
+  { path: "/blog", component: () => import("@/views/Blog.vue") },
+  { path: "/blogInfo", component: () => import("@/views/BlogInfo.vue") },
   { path: "/lottery", component: () => import("@/views/Lottery.vue") },
   { path: "/lotteryOld", component: () => import("@/views/Lottery_old.vue") },
   {
@@ -14,7 +16,7 @@ const routes = [
   { path: "/Markdown", component: () => import("@/views/Markdown.vue") },
   { path: "/Minio", component: () => import("@/views/Minio.vue") },
   { path: "/MinioInfo", component: () => import("@/views/MinioInfo.vue") },
-  { path: "/", redirect: "/page" },
+  { path: "/", redirect: "/blog" },
 ];
 const router = createRouter({
   history: createWebHashHistory(),

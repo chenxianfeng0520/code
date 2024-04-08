@@ -49,9 +49,16 @@ async function getBlogList() {
 }
 
 getBlogList()
+
+function toBack() {
+  router.push({
+    path: "/blog",
+  });
+}
 </script>
 <template>
-  <DownToTopTip text="欢迎！"></DownToTopTip>
+  <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
+  <DownToTopTip text="切换后台成功"></DownToTopTip>
   <div class="main-page">
     <a-card :bordered="false" class="blog animate__animated animate__bounceIn" @click="toPage(4)">
       <span>新增博客</span>
@@ -82,6 +89,13 @@ getBlogList()
 </template>
 
 <style lang="scss" scoped>
+.back {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  width: 30px;
+  cursor: pointer;
+}
 .main-page {
   padding: 120px 160px;
   display: grid;

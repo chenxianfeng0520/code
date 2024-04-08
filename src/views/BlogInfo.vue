@@ -48,23 +48,37 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="markdown-html animate__animated animate__bounceInUp">
+  <div class="markdown-html animate__animated animate__bounceIn">
+    <h1 class="title">{{ title }}</h1>
+    <div class="tagList">
+      <a-tag color="#108ee9">#ES6</a-tag>
+    </div>
     <div v-html="markdownHtml" class="markdown-body"></div>
   </div>
 </template>
 <style lang="scss" scoped>
 .markdown-html {
-  width: 800px;
-  height: 820px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: 0px;
-  margin-top: -380px;
-  border-radius: 0px;
+  width: 1100px;
+  margin: auto;
+  margin-top: 2%;
+  height: 93%;
+  border-radius: 8px;
   overflow: hidden;
   padding: 10px;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: #fff8f8;
+  padding: 20px;
+  .title {
+    color: #9b3333;
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    word-break: break-all;
+    word-wrap: break-word;
+  }
+  .tagList {
+    margin-bottom: 20px;
+    padding: 0 0;
+  }
 }
 </style>
