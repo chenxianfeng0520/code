@@ -10,6 +10,7 @@ import {
   CloudDownloadOutlined,
   InsertRowAboveOutlined,
 } from "@ant-design/icons-vue";
+import { message } from "ant-design-vue";
 const router = useRouter();
 const list = ref([]);
 const loading = ref(false);
@@ -42,6 +43,7 @@ function onClickInfo(item) {
 async function deleteInfo() {
   await deleteFileByName({ name: active.value });
   getFileList();
+  message.success("删除成功");
 }
 
 const handleChange = (info) => {
@@ -51,6 +53,7 @@ const handleChange = (info) => {
   if (info.file.status === "done") {
     console.log("Hello, Ant Design Vue!");
     getFileList();
+    message.success("上传成功");
   } else if (info.file.status === "error") {
     console.log(`${info.file.name} file upload failed.`);
   }

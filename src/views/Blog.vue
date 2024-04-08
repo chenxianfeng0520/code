@@ -38,7 +38,7 @@ getBlogList();
       <a-button class="tag" type="link">#javaScript</a-button>
       <a-button class="tag" type="link">#python</a-button>
       <a-button class="tag" type="link">#ES6</a-button>
-      <div class="desc">{{ item.name }}22222222222222222</div>
+      <div class="desc">{{ item.name }}</div>
     </a-card>
   </div>
 </template>

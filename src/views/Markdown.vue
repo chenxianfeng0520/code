@@ -124,12 +124,12 @@ function onAddBlog() {
   >
     <template v-if="!showPage">
       <EyeOutlined />
-      <span>显示预览</span>
+      <span>显示预览框</span>
     </template>
 
     <template v-else>
       <EyeInvisibleOutlined />
-      <span>隐藏预览</span>
+      <span>隐藏预览框</span>
     </template>
   </button>
   <button
@@ -156,7 +156,7 @@ function onAddBlog() {
 <style lang="scss" scoped>
 .monaco-editor-editor {
   width: 800px;
-  height: 820px;
+  height: 840px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -184,7 +184,7 @@ function onAddBlog() {
 
 .markdown-html {
   width: 800px;
-  height: 820px;
+  height: 840px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -211,7 +211,7 @@ function onAddBlog() {
 
 .editor-btn {
   position: fixed;
-  right: 60px;
+  right: 50px;
   top: 20px;
 
   span {
