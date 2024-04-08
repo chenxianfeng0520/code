@@ -101,7 +101,7 @@ function onAddBlog() {
       content_text: editor.getValue(),
     });
     router.push({
-      path: "/blog",
+      path: "/back",
     });
     message.success("博客新增成功");
   }

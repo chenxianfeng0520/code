@@ -38,7 +38,7 @@ getBlogList();
       <a-button class="tag" type="link">#javaScript</a-button>
       <a-button class="tag" type="link">#python</a-button>
       <a-button class="tag" type="link">#ES6</a-button>
-      <div class="desc">{{ item.name }}</div>
+      <div class="desc">- {{ item.name }}</div>
     </a-card>
   </div>
 </template>
@@ -62,7 +62,7 @@ getBlogList();
     font-size: 18px;
     line-height: 22px;
     color: #ff8484;
-    border-radius: 30px;
+    border-radius: 20px;
     height: 115px;
     font-family: sans-serif;
     margin-bottom: 60px;
@@ -74,7 +74,7 @@ getBlogList();
 
   .blogging {
     background: 10px 20px / 70px 70px no-repeat url(@/assets/blogging.png),
-    #5282a369;
+    #532a5c57;
     .title {
       display: block;
       width: 100%;
