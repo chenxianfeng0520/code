@@ -60,7 +60,7 @@ getBlogList();
   .ant-card {
     font-size: 18px;
     line-height: 22px;
-    color: rgb(210, 121, 121);
+    color: #ff8484;
     border-radius: 10px;
     height: 90px;
     font-family: sans-serif;
@@ -77,7 +77,7 @@ getBlogList();
 
   .blogging {
     background: 10px 12px / 70px 70px no-repeat url(@/assets/blogging.png),
-      #2c2b2ba8;
+    #4c4444a8;
     .title {
       vertical-align: middle;
       display: inline-block;
