@@ -13,9 +13,25 @@ import {
 import * as marked from "marked";
 import "github-markdown-css/github-markdown-light.css";
 
-import { useRoute } from "vue-router";
-import { onMounted } from "vue";
-const route = useRoute();
+import { useRoute } from 'vue-router'
+const route = useRoute()
+
+const title = ref('')
+const initInfo = ref(null)
+async function getInfo() {
+  initInfo.value = null;
+  if (route.query.id) {
+    const res = await getBlogById({
+      id: route.query.id
+    })
+    initInfo.value = res.data.data?.[0]?.content_text;
+    title.value = res.data.data?.[0]?.name;
+  }
+}
+const value = "";
+const containerRef = ref();
+let editor = null;
+
 var rendererMD = new marked.Renderer();
 marked.marked.setOptions({
   renderer: rendererMD,
@@ -28,31 +44,106 @@ marked.marked.setOptions({
   smartypants: false,
 });
 
+onMounted(async () => {
+  await getInfo()
+  editor = monaco.editor.create(containerRef.value, {
+    value: initInfo.value || value,
+    language: "markdown",
+    automaticLayout: true,
+    theme: "vs-dark",
+  });
+  markdownHtml.value = marked.marked(initInfo.value || value);
+  editor.onDidChangeModelContent(() => {
+    markdownHtml.value = marked.marked(editor.getValue());
+  });
+});
+
+const showPage = ref(true);
+function hidePage() {
+  showPage.value = !showPage.value;
+}
+
 const markdownHtml = ref("");
 
-const title = ref("");
-const initInfo = ref(null);
-async function getInfo() {
-  initInfo.value = null;
+function onAddBlog() {
   if (route.query.id) {
-    const res = await getBlogById({
-      id: route.query.id,
-    });
-    initInfo.value = res.data.data?.[0]?.content_text;
-    title.value = res.data.data?.[0]?.name;
-    markdownHtml.value = marked.marked(initInfo.value);
+    updateBlog({
+      name: title.value,
+      content_text: editor.getValue(),
+      id: route.query.id
+    })
+  } else {
+    addBlog({
+      name: title.value,
+      content_text: editor.getValue()
+    })
   }
+
 }
-onMounted(() => {
-  getInfo();
-});
+
+
 </script>
 <template>
-  <div class="markdown-html animate__animated animate__bounceInUp">
+  <a-input class="title" v-model:value="title" placeholder="请输入标题"></a-input>
+  <DownToTopTip text="markdown"></DownToTopTip>
+  <!-- <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown">
+    <TableOutlined />
+  </button>
+  <button type="button" class="btn btn-primary pic-btn animate__animated animate__zoomInDown">
+    <PictureOutlined />
+  </button> -->
+  <button type="button" class="btn btn-primary editor-btn animate__animated animate__zoomInDown" @click="hidePage">
+    <template v-if="!showPage">
+      <EyeOutlined />
+      <span>显示预览</span>
+    </template>
+
+    <template v-else>
+      <EyeInvisibleOutlined />
+      <span>隐藏预览</span>
+    </template>
+
+  </button>
+  <button type="button" class="btn btn-success yulang animate__animated animate__zoomInDown" @click="onAddBlog">
+    <SaveOutlined />
+    <span>保存</span>
+  </button>
+  <div class="markdown-html animate__animated animate__bounceInUp" v-show="showPage">
     <div v-html="markdownHtml" class="markdown-body"></div>
+  </div>
+  <div class="monaco-editor-editor animate__animated animate__bounceInDown" :class="{ showPage: !showPage }">
+    <div ref="containerRef" style="height: 100%; width: 100%"></div>
   </div>
 </template>
 <style lang="scss" scoped>
+.monaco-editor-editor {
+  width: 800px;
+  height: 820px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -800px;
+  margin-top: -380px;
+  border-radius: 0px;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #1e1e1e;
+}
+
+.title {
+  position: fixed;
+  right: 310px;
+  top: 20px;
+  width: 700px;
+  height: 38px;
+}
+
+.showPage {
+  width: 1200px;
+  margin-left: -600px;
+}
+
 .markdown-html {
   width: 800px;
   height: 820px;
@@ -66,5 +157,53 @@ onMounted(() => {
   padding: 10px;
   box-sizing: border-box;
   background-color: #ffffff;
+}
+
+.yulang {
+  position: fixed;
+  right: 190px;
+  top: 20px;
+
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
+}
+
+.editor-btn {
+  position: fixed;
+  right: 60px;
+  top: 20px;
+
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
+}
+
+.pic-btn {
+  position: fixed;
+  right: 190px;
+  top: 20px;
+
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
+}
+
+.table-btn {
+  position: fixed;
+  right: 240px;
+  top: 20px;
+
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
 }
 </style>
