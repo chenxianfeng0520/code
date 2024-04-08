@@ -84,7 +84,7 @@ function changeType() {
   >
     <a-button type="primary">
       <CloudOutlined />
-      <span>新增文件</span>
+      <span>上传</span>
     </a-button>
   </a-upload>
   <a-button
@@ -180,7 +180,7 @@ function changeType() {
   &.pre_page {
     grid-template-columns: repeat(auto-fill, calc(12.5% - 15px));
     grid-column-gap: 15px;
-    padding: 120px 80px;
+    padding: 120px 150px;
   }
   .ant-card {
     font-size: 16px;
@@ -243,13 +243,13 @@ function changeType() {
 }
 .preview {
   position: fixed;
-  left: 550px;
+  right: 30px;
   top: 30px;
 }
 .seePic {
   position: fixed;
-  left: 460px;
-  top: 30px;
+  left: 20px;
+  top: 150px;
 }
 .dPic {
   position: fixed;
@@ -258,8 +258,8 @@ function changeType() {
 }
 .changePic {
   position: fixed;
-  left: 250px;
-  top: 30px;
+  left: 20px;
+  top: 70px;
 }
 .deletePic {
   position: fixed;
@@ -268,8 +268,8 @@ function changeType() {
 }
 .uploadPic {
   position: fixed;
-  left: 340px;
-  top: 30px;
+  left: 20px;
+  top: 110px;
 }
 :deep(.ant-upload-list) {
   display: none;

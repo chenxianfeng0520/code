@@ -13,12 +13,12 @@ import {
 import * as marked from "marked";
 import "github-markdown-css/github-markdown-light.css";
 
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 import { message } from "ant-design-vue";
 
 const route = useRoute();
-
+const router = useRouter();
 const title = ref("");
 const initInfo = ref(null);
 async function getInfo() {
@@ -100,28 +100,23 @@ function onAddBlog() {
       name: title.value,
       content_text: editor.getValue(),
     });
+    router.push({
+      path: "/blog",
+    });
     message.success("博客新增成功");
   }
 }
 </script>
 <template>
-  <a-input
-    class="title"
-    v-model:value="title"
-    placeholder="请输入标题"
-  ></a-input>
-  <DownToTopTip text="markdown"></DownToTopTip>
+  <a-input class="title" v-model:value="title" placeholder="请输入标题"></a-input>
+  <!-- <DownToTopTip text="markdown"></DownToTopTip> -->
   <!-- <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown">
     <TableOutlined />
   </button>
   <button type="button" class="btn btn-primary pic-btn animate__animated animate__zoomInDown">
     <PictureOutlined />
   </button> -->
-  <button
-    type="button"
-    class="btn btn-primary editor-btn animate__animated animate__zoomInDown"
-    @click="hidePage"
-  >
+  <button type="button" class="btn btn-primary editor-btn animate__animated animate__zoomInDown" @click="hidePage">
     <template v-if="!showPage">
       <EyeOutlined />
       <span>显示预览框</span>
@@ -132,24 +127,14 @@ function onAddBlog() {
       <span>隐藏预览框</span>
     </template>
   </button>
-  <button
-    type="button"
-    class="btn btn-success yulang animate__animated animate__zoomInDown"
-    @click="onAddBlog"
-  >
+  <button type="button" class="btn btn-success yulang animate__animated animate__zoomInDown" @click="onAddBlog">
     <SaveOutlined />
     <span>保存</span>
   </button>
-  <div
-    class="markdown-html animate__animated animate__bounceInUp"
-    v-show="showPage"
-  >
+  <div class="markdown-html animate__animated animate__bounceInUp" v-show="showPage">
     <div v-html="markdownHtml" class="markdown-body"></div>
   </div>
-  <div
-    class="monaco-editor-editor animate__animated animate__bounceInDown"
-    :class="{ showPage: !showPage }"
-  >
+  <div class="monaco-editor-editor animate__animated animate__bounceInDown" :class="{ showPage: !showPage }">
     <div ref="containerRef" style="height: 100%; width: 100%"></div>
   </div>
 </template>
@@ -191,7 +176,7 @@ function onAddBlog() {
   margin-left: 0px;
   margin-top: -380px;
   border-radius: 0px;
-  overflow: hidden;
+  overflow: auto;
   padding: 10px;
   box-sizing: border-box;
   background-color: #ffffff;

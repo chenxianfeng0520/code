@@ -66,9 +66,9 @@ onMounted(() => {
   width: 1100px;
   margin: auto;
   margin-top: 20px;
-  min-height: calc(100% - 20px);
+  height: calc(100% - 40px);
   border-radius: 2px;
-  overflow: hidden;
+  overflow: auto;
   padding: 10px;
   box-sizing: border-box;
   background-color: #fff8f8;
