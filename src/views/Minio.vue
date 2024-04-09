@@ -223,19 +223,19 @@ function changeType() {
   .minio {
     &.files {
       background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
-        #ffffff1a;
+      #2c2b2b30;
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
-          #5853531a;
+        #ffffff1a;
         color: #8b9ab9;
       }
     }
     &.file {
       background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
-        #ffffff1a;
+      #2c2b2b30;
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
-          #5853531a;
+        #ffffff1a;
         color: #8b9ab9;
       }
     }
