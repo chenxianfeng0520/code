@@ -75,32 +75,18 @@ function changeType() {
 }
 </script>
 <template>
-  <a-upload
-    name="file"
-    :action="`http://139.224.72.78/minio/uploadObject`"
-    :headers="headers"
-    @change="handleChange"
-    class="uploadPic animate__animated animate__zoomIn"
-  >
+  <a-upload name="file" :action="`http://139.224.72.78/minio/uploadObject`" :headers="headers" @change="handleChange"
+    class="uploadPic animate__animated animate__zoomIn">
     <a-button type="primary">
       <CloudOutlined />
       <span>上传</span>
     </a-button>
   </a-upload>
-  <a-button
-    type="primary"
-    class="preview animate__animated animate__zoomIn"
-    @click="changeType"
-  >
+  <a-button type="primary" class="preview animate__animated animate__zoomIn" @click="changeType">
     <InsertRowAboveOutlined />
     <span>切换视图</span>
   </a-button>
-  <a-button
-    type="primary"
-    class="seePic animate__animated animate__zoomIn"
-    v-show="active"
-    @click="getInfo"
-  >
+  <a-button type="primary" class="seePic animate__animated animate__zoomIn" v-show="active" @click="getInfo">
     <EyeOutlined />
     <span>查看</span>
   </a-button>
@@ -112,60 +98,35 @@ function changeType() {
     <CloudDownloadOutlined />
     <span>下载</span>
   </a-button> -->
-  <a-upload
-    name="file"
-    :action="`http://139.224.72.78/minio/uploadObject?name=${active}`"
-    :headers="headers"
-    @change="handleChange"
-    class="changePic animate__animated animate__zoomIn"
-    v-show="active"
-  >
+  <a-upload name="file" :action="`http://139.224.72.78/minio/uploadObject?name=${active}`" :headers="headers"
+    @change="handleChange" class="changePic animate__animated animate__zoomIn" v-show="active">
     <a-button type="primary">
       <CloudOutlined />
       <span>替换</span>
     </a-button>
   </a-upload>
-  <a-button
-    type="primary"
-    danger
-    class="deletePic animate__animated animate__zoomIn"
-    v-show="active"
-    @click.stop="deleteInfo"
-  >
+  <a-button type="primary" danger class="deletePic animate__animated animate__zoomIn" v-show="active"
+    @click.stop="deleteInfo">
     <ClearOutlined />
     <span>删除</span>
   </a-button>
   <div class="main-page" :class="{ pre_page: cardType }">
     <a-spin tip="minio列表加载中" v-if="loading" />
     <template v-else>
-      <a-image
-        v-for="item in list"
-        class="minio_pic animate__animated animate__zoomIn"
-        :src="`http://139.224.72.78:9000/picturegallery/${getConent(
-          item
-        )}?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200`"
-        @click="onClickInfo(item)"
+      <a-image v-for="item in list" class="minio_pic animate__animated animate__zoomIn" :src="`http://139.224.72.78:9000/picturegallery/${getConent(
+    item
+  )}?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200`" @click="onClickInfo(item)"
         :class="{
-          active: active == getConent(item),
-        }"
-        :preview="false"
-        v-if="cardType"
-      />
-      <a-card
-        v-else
-        :bordered="false"
-        class="minio files animate__animated animate__zoomIn"
-        :class="{
-          file: item.name,
-          files: item.prefix,
-          active: active == getConent(item),
-        }"
-        @click="onClickInfo(item)"
-        v-for="item in list"
-      >
+    active: active == getConent(item),
+  }" :preview="false" v-if="cardType" />
+      <a-card v-else :bordered="false" class="minio files animate__animated animate__zoomIn" :class="{
+    file: item.name,
+    files: item.prefix,
+    active: active == getConent(item),
+  }" @click="onClickInfo(item)" v-for="item in list">
         <span class="content" :title="getConent(item)">{{
-          getConent(item)
-        }}</span>
+    getConent(item)
+  }}</span>
       </a-card>
     </template>
   </div>
@@ -177,11 +138,13 @@ function changeType() {
   grid-template-columns: repeat(auto-fill, calc(25% - 20px));
   grid-column-gap: 20px;
   cursor: pointer;
+
   &.pre_page {
-    grid-template-columns: repeat(auto-fill, calc(12.5% - 15px));
+    grid-template-columns: repeat(auto-fill, calc(20% - 15px));
     grid-column-gap: 15px;
     padding: 120px 150px;
   }
+
   .ant-card {
     font-size: 16px;
     line-height: 22px;
@@ -197,6 +160,7 @@ function changeType() {
 
     :deep(.ant-card-body) {
       padding: 20px 15px 0 80px;
+
       .content {
         vertical-align: middle;
         display: inline-block;
@@ -207,15 +171,25 @@ function changeType() {
       }
     }
   }
+
   :deep(.ant-image) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     .minio_pic {
-      max-width: 70%;
+      max-width: 80%;
       width: auto;
-      height: 70%;
+      height: 80%;
       max-height: 70%;
+      background-color: #2c2b2b30;
+      padding: 10px;
+      border-radius: 30px;
+
+
       &.active {
-        border: 2px solid #fff;
         border-radius: 20px;
+        background-color: #ffffff1a;
       }
     }
   }
@@ -223,57 +197,68 @@ function changeType() {
   .minio {
     &.files {
       background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
-      #2c2b2b30;
+        #2c2b2b30;
+
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/files.png),
-        #ffffff1a;
+          #ffffff1a;
         color: #8b9ab9;
       }
     }
+
     &.file {
       background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
-      #2c2b2b30;
+        #2c2b2b30;
+
       &.active {
         background: 25px 25px / 40px 40px no-repeat url(@/assets/file.png),
-        #ffffff1a;
+          #ffffff1a;
         color: #8b9ab9;
       }
     }
   }
 }
+
 .preview {
   position: fixed;
   right: 30px;
   top: 30px;
 }
+
 .seePic {
   position: fixed;
   left: 20px;
   top: 150px;
 }
+
 .dPic {
   position: fixed;
   left: 120px;
   top: 30px;
 }
+
 .changePic {
   position: fixed;
   left: 20px;
   top: 70px;
 }
+
 .deletePic {
   position: fixed;
   left: 20px;
   top: 30px;
 }
+
 .uploadPic {
   position: fixed;
   left: 20px;
   top: 110px;
 }
+
 :deep(.ant-upload-list) {
   display: none;
 }
+
 .ant-btn {
   span {
     vertical-align: middle;
