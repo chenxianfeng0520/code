@@ -51,13 +51,16 @@ onMounted(() => {
   <div class="markdown-html animate__animated animate__bounceIn">
     <h1 class="title">
       <img src="@/assets/blogging.png" alt="" />
+      <img src="@/assets/maozi.png" alt="" class="maozi" />
+      <img src="@/assets/lingjie.png" alt="" class="lingjie" />
       <span>{{ title }}</span>
     </h1>
     <div class="tagList">
-      <a-button type="link" class="tag">#ES6</a-button>
-      <a-button type="link" class="tag">#ES6</a-button>
+      <a-tag color="#6060e2">#ES6</a-tag>
+      <a-tag color="#6060e2">#python</a-tag>
+      <a-tag color="#6060e2">#javaScript</a-tag>
     </div>
-    <a-divider />
+
     <div v-html="markdownHtml" class="markdown-body"></div>
   </div>
 </template>
@@ -67,34 +70,62 @@ onMounted(() => {
   margin: auto;
   margin-top: 20px;
   height: calc(100% - 40px);
-  border-radius: 2px;
-  overflow: auto;
-  padding: 10px;
+  border-radius: 8px;
+  overflow: hidden;
   box-sizing: border-box;
-  background-color: #fff8f8;
-  padding: 20px;
+  background-color: #ffffff;
+  padding: 35px 0px;
+
   .title {
-    color: #9b3333;
-    margin-bottom: 10px;
+    color: #ff2323;
+    margin-bottom: 4px;
     font-size: 28px;
     font-weight: 600;
     word-break: break-all;
     word-wrap: break-word;
+    padding: 0px 30px 0 80px;
+
     img {
-      width: 30px;
-      vertical-align: middle;
-      margin-right: 10px;
+      width: 36px;
+      position: absolute;
+      left: 28px;
+      top: 52px;
     }
+
+    .maozi {
+      position: absolute;
+      top: 35px;
+      left: 18px;
+      width: 46px;
+      transform: rotate(345deg);
+    }
+
+    .lingjie {
+      position: absolute;
+      top: 82px;
+      left: 29px;
+      width: 46px;
+      transform: rotate(355deg);
+    }
+
+
+
     span {
       vertical-align: middle;
     }
   }
+
   .tagList {
-    padding: 0 10px;
-    .tag {
-      padding-left: 0px;
-      color: #108ee9;
-    }
+    padding: 0 4px 20px 50px;
+    border-bottom: 1px dashed #c7c7c7;
+    margin: 0 30px;
+    margin-bottom: 10px;
+  }
+
+  .markdown-body {
+    overflow: auto;
+    height: calc(100% - 100px);
+    padding: 10px 0px 0 30px;
   }
 }
 </style>

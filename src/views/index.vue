@@ -67,23 +67,48 @@ async function onDelete(item) {
   getBlogList();
   message.success('博客删除成功');
 }
+const minioType = ref('minio_back')
+function minioBack() {
+  minioType.value = "minio_back"
+}
+function minioFront() {
+  minioType.value = "minio_front"
+}
+
+const lotteryType = ref('lottery_back')
+function lotteryBack() {
+  lotteryType.value = "lottery_back"
+}
+function lotteryFront() {
+  lotteryType.value = "lottery_front"
+}
+
+const blogType = ref('blog_front')
+function blogBack() {
+  blogType.value = "blog_back"
+}
+function blogFront() {
+  blogType.value = "blog_front"
+}
 </script>
 <template>
-  <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
+  <img class="back" src="@/assets/back.png" alt="" @click="toBack" />
+  <img class="minio_back" src="@/assets/minio_back.png" alt="" @click="minioFront" v-if="minioType == 'minio_back'" />
+  <img class="minio_back" src="@/assets/minio_front.png" alt="" @click="minioBack" v-if="minioType == 'minio_front'" />
+  <img class="lottery_back" src="@/assets/lottery_back.png" alt="" @click="lotteryFront"
+    v-if="lotteryType == 'lottery_back'" />
+  <img class="lottery_back" src="@/assets/lottery_front.png" alt="" @click="lotteryBack"
+    v-if="lotteryType == 'lottery_front'" />
+  <img class="blog_back" src="@/assets/blog_back.png" alt="" @click="blogFront" v-if="blogType == 'blog_back'" />
+  <img class="blog_back" src="@/assets/blog_front.png" alt="" @click="blogBack" v-if="blogType == 'blog_front'" />
   <DownToTopTip text="切换后台成功"></DownToTopTip>
   <div class="main-page">
-    <a-card
-      :bordered="false"
-      class="blog animate__animated animate__bounceIn"
-      @click="toPage(4)"
-    >
+    <a-card :bordered="false" class="blog animate__animated animate__bounceIn" @click="toPage(4)"
+      v-if="blogType == 'blog_front'">
       <span>新增博客</span>
     </a-card>
-    <a-card
-      :bordered="false"
-      class="experiment animate__animated animate__bounceIn"
-      @click="toPage(1)"
-    >
+    <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toPage(1)"
+      v-if="lotteryType == 'lottery_front'">
       <span>生成随机数</span>
     </a-card>
     <!-- <a-card :bordered="false" class="suiji animate__animated animate__bounceIn" @click="toPage(5)">
@@ -95,26 +120,17 @@ async function onDelete(item) {
     <a-card :bordered="false" class="Monaco animate__animated animate__bounceIn" @click="toPage(3)">
       <span>monaco-editor</span>
     </a-card> -->
-    <a-card
-      :bordered="false"
-      class="minio animate__animated animate__bounceIn"
-      @click="toPage(6)"
-    >
+    <a-card :bordered="false" class="minio animate__animated animate__bounceIn" @click="toPage(6)"
+      v-if="minioType == 'minio_front'">
       <span>minio中文件</span>
     </a-card>
     <!-- <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
       <span>在线编辑excel文件</span>
     </a-card> -->
-    <a-card
-      :bordered="false"
-      class="blogging animate__animated animate__bounceIn"
-      v-for="item in blogList"
-      @click="toPage(7, item)"
-    >
+    <a-card :bordered="false" class="blogging animate__animated animate__bounceIn" v-for="item in blogList"
+      @click="toPage(7, item)" v-if="blogType == 'blog_front'">
       <span>{{ item.name }}</span>
-      <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
-        >- 删除 -</a-button
-      >
+      <a-button type="link" danger class="delete" @click.stop="onDelete(item)">- 删除 -</a-button>
     </a-card>
   </div>
 </template>
@@ -127,8 +143,33 @@ async function onDelete(item) {
   width: 30px;
   cursor: pointer;
 }
+
+.minio_back {
+  position: fixed;
+  right: 80px;
+  bottom: 31px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.lottery_back {
+  position: fixed;
+  right: 250px;
+  bottom: 25px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.blog_back {
+  position: fixed;
+  right: 312px;
+  bottom: 31px;
+  height: 30px;
+  cursor: pointer;
+}
+
 .main-page {
-  padding: 120px 160px;
+  padding: 100px 100px;
   display: grid;
   grid-template-columns: repeat(auto-fill, calc(25% - 50px));
   grid-column-gap: 50px;
@@ -180,9 +221,11 @@ async function onDelete(item) {
   .blogging {
     background: 0px 25px / 70px 70px no-repeat url(@/assets/blogging.png),
       #2c2b2ba8;
+
     span {
       display: block;
     }
+
     .delete {
       padding-left: 0px;
     }

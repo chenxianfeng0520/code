@@ -26,7 +26,7 @@ async function getBlogList() {
 getBlogList();
 </script>
 <template>
-  <img class="back" src="@/assets/back.png" alt="" @click="toBack" />
+  <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
   <div class="main-page">
     <a-card
       :bordered="false"
