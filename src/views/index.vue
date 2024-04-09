@@ -195,32 +195,32 @@ function blogFront() {
 
   .experiment {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .suiji {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/suiji.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .Docker {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/Docker.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .Monaco {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/experiment.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .markdown {
     background: 0px 25px / 100px 70px no-repeat url(@/assets/markdown.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .blogging {
     background: 0px 25px / 70px 70px no-repeat url(@/assets/blogging.png),
-      #2c2b2ba8;
+      #2c2b2b30;
 
     span {
       display: block;
@@ -233,7 +233,7 @@ function blogFront() {
 
   .blog {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
-      #2c2b2ba8;
+      #2c2b2b30;
     // font-size: 36px;
     // line-height: 36px;
     // padding-left: 46px;
@@ -242,7 +242,7 @@ function blogFront() {
 
   .minio {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
-      #2c2b2ba8;
+      #2c2b2b30;
   }
 
   .excel {
