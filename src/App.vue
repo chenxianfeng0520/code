@@ -4,32 +4,30 @@ const router = useRouter();
 const route = useRoute();
 function toBack() {
   console.log(route, "route");
-  router.push({
-    path: "/back",
-  });
+  router.go(-1);
 }
+
+const whiteList = ["/blog", "/back"];
 </script>
 
 <template>
   <router-view></router-view>
   <img
     class="home"
-    src="@/assets/home_active.png"
+    src="@/assets/home.png"
     alt=""
     @click="toBack"
-    v-if="route.path == '/back'"
+    v-if="whiteList.every((v) => v != route.path)"
   />
-  <img class="home" src="@/assets/home.png" alt="" @click="toBack" v-else />
 </template>
 
 <style lang="scss">
 .home {
   position: fixed;
-  left: 10px;
-  bottom: 30px;
-  width: 30px;
+  left: 30px;
+  bottom: 20px;
+  width: 32px;
   cursor: pointer;
-  z-index: -1;
 }
 #app {
   height: 100vh;

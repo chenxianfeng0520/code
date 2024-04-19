@@ -174,13 +174,13 @@ onMounted(() => {
 
 .deletePic {
   position: fixed;
-  left: 120px;
+  left: 180px;
   top: 20px;
 }
 
 .uploadPic {
   position: fixed;
-  left: 20px;
+  left: 80px;
   top: 20px;
 }
 

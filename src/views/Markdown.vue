@@ -7,7 +7,7 @@ import {
   FormOutlined,
   TableOutlined,
   PictureOutlined,
-  SaveOutlined,
+  SendOutlined,
   EyeInvisibleOutlined,
 } from "@ant-design/icons-vue";
 import * as marked from "marked";
@@ -76,11 +76,6 @@ function handleKeyDown(event) {
   }
 }
 
-const showPage = ref(true);
-function hidePage() {
-  showPage.value = !showPage.value;
-}
-
 const markdownHtml = ref("");
 
 function onAddBlog() {
@@ -108,44 +103,45 @@ function onAddBlog() {
 }
 </script>
 <template>
-  <a-input class="title" v-model:value="title" placeholder="请输入标题"></a-input>
-  <!-- <DownToTopTip text="markdown"></DownToTopTip> -->
-  <!-- <button type="button" class="btn btn-primary table-btn animate__animated animate__zoomInDown">
-    <TableOutlined />
-  </button>
-  <button type="button" class="btn btn-primary pic-btn animate__animated animate__zoomInDown">
-    <PictureOutlined />
-  </button> -->
-  <button type="button" class="btn btn-primary editor-btn animate__animated animate__zoomInDown" @click="hidePage">
-    <template v-if="!showPage">
+  <div class="markdown_page">
+    <button
+      type="button"
+      class="btn btn-primary editor-btn animate__animated animate__zoomInDown"
+    >
       <EyeOutlined />
-      <span>显示预览框</span>
-    </template>
-
-    <template v-else>
-      <EyeInvisibleOutlined />
-      <span>隐藏预览框</span>
-    </template>
-  </button>
-  <button type="button" class="btn btn-success yulang animate__animated animate__zoomInDown" @click="onAddBlog">
-    <SaveOutlined />
-    <span>保存</span>
-  </button>
-  <div class="markdown-html animate__animated animate__bounceInUp" v-show="showPage">
-    <div v-html="markdownHtml" class="markdown-body"></div>
-  </div>
-  <div class="monaco-editor-editor animate__animated animate__bounceInDown" :class="{ showPage: !showPage }">
-    <div ref="containerRef" style="height: 100%; width: 100%"></div>
+      <span>预览</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-success yulang animate__animated animate__zoomInDown"
+      @click="onAddBlog"
+    >
+      <SendOutlined />
+      <span>发布</span>
+    </button>
+    <a-input
+      class="title animate__animated animate__zoomInDown"
+      v-model:value="title"
+      placeholder="博客标题"
+    ></a-input>
+    <div class="monaco-editor-editor animate__animated animate__zoomInUp">
+      <div ref="containerRef" style="height: 100%; width: 100%"></div>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.markdown_page {
+  height: 100vh;
+  width: 100vw;
+  background-color: #bb98987a;
+}
 .monaco-editor-editor {
-  width: 800px;
+  width: 1200px;
   height: 840px;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -800px;
+  margin-left: -600px;
   margin-top: -380px;
   border-radius: 0px;
   overflow: hidden;
@@ -156,35 +152,15 @@ function onAddBlog() {
 
 .title {
   position: fixed;
-  right: 310px;
+  right: 460px;
   top: 20px;
-  width: 700px;
+  width: 990px;
   height: 38px;
-}
-
-.showPage {
-  width: 1200px;
-  margin-left: -600px;
-}
-
-.markdown-html {
-  width: 800px;
-  height: 840px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: 0px;
-  margin-top: -380px;
-  border-radius: 0px;
-  overflow: auto;
-  padding: 10px;
-  box-sizing: border-box;
-  background-color: #ffffff;
 }
 
 .yulang {
   position: fixed;
-  right: 190px;
+  right: 250px;
   top: 20px;
 
   span {
@@ -196,7 +172,7 @@ function onAddBlog() {
 
 .editor-btn {
   position: fixed;
-  right: 50px;
+  right: 350px;
   top: 20px;
 
   span {

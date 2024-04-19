@@ -65,72 +65,113 @@ async function onDelete(item) {
     id: item.id,
   });
   getBlogList();
-  message.success('博客删除成功');
+  message.success("博客删除成功");
 }
-const minioType = ref('minio_back')
+const minioType = ref("minio_front");
 function minioBack() {
-  minioType.value = "minio_back"
+  minioType.value = "minio_back";
 }
 function minioFront() {
-  minioType.value = "minio_front"
+  minioType.value = "minio_front";
 }
 
-const lotteryType = ref('lottery_back')
+const lotteryType = ref("lottery_back");
 function lotteryBack() {
-  lotteryType.value = "lottery_back"
+  lotteryType.value = "lottery_back";
 }
 function lotteryFront() {
-  lotteryType.value = "lottery_front"
+  lotteryType.value = "lottery_front";
 }
 
-const blogType = ref('blog_front')
+const blogType = ref("blog_front");
 function blogBack() {
-  blogType.value = "blog_back"
+  blogType.value = "blog_back";
 }
 function blogFront() {
-  blogType.value = "blog_front"
+  blogType.value = "blog_front";
 }
 </script>
 <template>
   <img class="back" src="@/assets/back.png" alt="" @click="toBack" />
-  <img class="minio_back" src="@/assets/minio_back.png" alt="" @click="minioFront" v-if="minioType == 'minio_back'" />
-  <img class="minio_back" src="@/assets/minio_front.png" alt="" @click="minioBack" v-if="minioType == 'minio_front'" />
-  <img class="lottery_back" src="@/assets/lottery_back.png" alt="" @click="lotteryFront"
-    v-if="lotteryType == 'lottery_back'" />
-  <img class="lottery_back" src="@/assets/lottery_front.png" alt="" @click="lotteryBack"
-    v-if="lotteryType == 'lottery_front'" />
-  <img class="blog_back" src="@/assets/blog_back.png" alt="" @click="blogFront" v-if="blogType == 'blog_back'" />
-  <img class="blog_back" src="@/assets/blog_front.png" alt="" @click="blogBack" v-if="blogType == 'blog_front'" />
-  <DownToTopTip text="切换后台成功"></DownToTopTip>
+  <img
+    class="minio_back"
+    src="@/assets/minio_back.png"
+    alt=""
+    @click="minioFront"
+    v-if="minioType == 'minio_back'"
+  />
+  <img
+    class="minio_back"
+    src="@/assets/minio_front.png"
+    alt=""
+    @click="minioBack"
+    v-if="minioType == 'minio_front'"
+  />
+  <img
+    class="lottery_back"
+    src="@/assets/lottery_back.png"
+    alt=""
+    @click="lotteryFront"
+    v-if="lotteryType == 'lottery_back'"
+  />
+  <img
+    class="lottery_back"
+    src="@/assets/lottery_front.png"
+    alt=""
+    @click="lotteryBack"
+    v-if="lotteryType == 'lottery_front'"
+  />
+  <img
+    class="blog_back"
+    src="@/assets/blog_back.png"
+    alt=""
+    @click="blogFront"
+    v-if="blogType == 'blog_back'"
+  />
+  <img
+    class="blog_back"
+    src="@/assets/blog_front.png"
+    alt=""
+    @click="blogBack"
+    v-if="blogType == 'blog_front'"
+  />
   <div class="main-page">
-    <a-card :bordered="false" class="blog animate__animated animate__bounceIn" @click="toPage(4)"
-      v-if="blogType == 'blog_front'">
-      <span>新增博客</span>
+    <a-card
+      :bordered="false"
+      class="blog animate__animated animate__bounceIn"
+      @click="toPage(4)"
+      v-if="blogType == 'blog_front'"
+    >
+      <span>新建博文</span>
     </a-card>
-    <a-card :bordered="false" class="experiment animate__animated animate__bounceIn" @click="toPage(1)"
-      v-if="lotteryType == 'lottery_front'">
+
+    <a-card
+      :bordered="false"
+      class="blog animate__animated animate__bounceIn"
+      v-for="item in blogList"
+      @click="toPage(7, item)"
+      v-if="blogType == 'blog_front'"
+    >
+      <span>{{ item.name }}</span>
+      <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
+        >- 删除博文 -</a-button
+      >
+    </a-card>
+    <a-card
+      :bordered="false"
+      class="experiment animate__animated animate__bounceIn"
+      @click="toPage(1)"
+      v-if="lotteryType == 'lottery_front'"
+    >
       <span>生成随机数</span>
     </a-card>
-    <!-- <a-card :bordered="false" class="suiji animate__animated animate__bounceIn" @click="toPage(5)">
-      <span>生成随机数（旧）</span>
-    </a-card> -->
-    <!-- <a-card :bordered="false" class="Docker animate__animated animate__bounceIn" @click="toPage(2)">
-      <span>vue-codemirror</span>
-    </a-card>
-    <a-card :bordered="false" class="Monaco animate__animated animate__bounceIn" @click="toPage(3)">
-      <span>monaco-editor</span>
-    </a-card> -->
-    <a-card :bordered="false" class="minio animate__animated animate__bounceIn" @click="toPage(6)"
-      v-if="minioType == 'minio_front'">
-      <span>minio中文件</span>
-    </a-card>
-    <!-- <a-card :bordered="false" class="excel animate__animated animate__bounceIn">
-      <span>在线编辑excel文件</span>
-    </a-card> -->
-    <a-card :bordered="false" class="blogging animate__animated animate__bounceIn" v-for="item in blogList"
-      @click="toPage(7, item)" v-if="blogType == 'blog_front'">
-      <span>{{ item.name }}</span>
-      <a-button type="link" danger class="delete" @click.stop="onDelete(item)">- 删除 -</a-button>
+    <a-card
+      :bordered="false"
+      class="minio animate__animated animate__bounceIn"
+      @click="toPage(6)"
+      v-if="minioType == 'minio_front'"
+    >
+      <span>管理minio桶文件</span>
     </a-card>
   </div>
 </template>
@@ -218,26 +259,15 @@ function blogFront() {
       #2c2b2b30;
   }
 
-  .blogging {
-    background: 0px 25px / 70px 70px no-repeat url(@/assets/blogging.png),
-      #2c2b2b30;
-
-    span {
-      display: block;
-    }
-
-    .delete {
-      padding-left: 0px;
-    }
-  }
-
   .blog {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
       #2c2b2b30;
-    // font-size: 36px;
-    // line-height: 36px;
-    // padding-left: 46px;
-    // font-weight: 600;
+    span {
+      display: block;
+    }
+    .delete {
+      padding-left: 10px;
+    }
   }
 
   .minio {
