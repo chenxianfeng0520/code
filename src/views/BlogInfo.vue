@@ -48,33 +48,37 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="markdown-html animate__animated animate__bounceIn">
-    <h1 class="title">
-      <img src="@/assets/blogging.png" alt="" />
-      <img src="@/assets/maozi.png" alt="" class="maozi" />
-      <img src="@/assets/lingjie.png" alt="" class="lingjie" />
-      <span>{{ title }}</span>
-    </h1>
-    <div class="tagList">
-      <a-tag color="#6060e2">#ES6</a-tag>
-      <a-tag color="#6060e2">#python</a-tag>
-      <a-tag color="#6060e2">#javaScript</a-tag>
-    </div>
+  <div class="bloginfo_page">
+    <div class="markdown-html animate__animated animate__bounceIn">
+      <h1 class="title">
+        <span>{{ title }}</span>
+      </h1>
+      <div class="tagList">
+        <a-tag color="#6060e2">#ES6</a-tag>
+        <a-tag color="#6060e2">#python</a-tag>
+        <a-tag color="#6060e2">#javaScript</a-tag>
+      </div>
 
-    <div v-html="markdownHtml" class="markdown-body"></div>
+      <div v-html="markdownHtml" class="markdown-body"></div>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
+.bloginfo_page {
+  height: 100vh;
+  width: 100vw;
+  background-color: #bb98987a;
+  padding-top: 30px;
+}
 .markdown-html {
   width: 1100px;
   margin: auto;
-  margin-top: 20px;
   height: calc(100% - 40px);
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-sizing: border-box;
   background-color: #ffffff;
-  padding: 35px 0px;
+  padding: 15px 0px;
 
   .title {
     color: #ff2323;
@@ -83,32 +87,7 @@ onMounted(() => {
     font-weight: 600;
     word-break: break-all;
     word-wrap: break-word;
-    padding: 0px 30px 0 80px;
-
-    img {
-      width: 36px;
-      position: absolute;
-      left: 28px;
-      top: 52px;
-    }
-
-    .maozi {
-      position: absolute;
-      top: 35px;
-      left: 18px;
-      width: 46px;
-      transform: rotate(345deg);
-    }
-
-    .lingjie {
-      position: absolute;
-      top: 82px;
-      left: 29px;
-      width: 46px;
-      transform: rotate(355deg);
-    }
-
-
+    padding: 0px 30px 0 20px;
 
     span {
       vertical-align: middle;
@@ -116,9 +95,9 @@ onMounted(() => {
   }
 
   .tagList {
-    padding: 0 4px 20px 50px;
+    padding: 0 4px 20px 0px;
     border-bottom: 1px dashed #c7c7c7;
-    margin: 0 30px;
+    margin: 0 20px;
     margin-bottom: 10px;
   }
 

@@ -142,7 +142,7 @@ function onAddBlog() {
   top: 50%;
   left: 50%;
   margin-left: -600px;
-  margin-top: -380px;
+  margin-top: -390px;
   border-radius: 0px;
   overflow: hidden;
   padding: 10px;
