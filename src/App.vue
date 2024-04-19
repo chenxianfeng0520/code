@@ -25,9 +25,13 @@ const whiteList = ["/blog", "/back"];
 .home {
   position: fixed;
   left: 30px;
-  bottom: 20px;
+  top: 20px;
   width: 32px;
   cursor: pointer;
+  opacity: 0.2;
+  &:hover{
+    opacity: 1;
+  }
 }
 #app {
   height: 100vh;

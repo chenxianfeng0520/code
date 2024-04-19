@@ -54,9 +54,9 @@ onMounted(() => {
         <span>{{ title }}</span>
       </h1>
       <div class="tagList">
-        <a-tag color="#6060e2">#ES6</a-tag>
-        <a-tag color="#6060e2">#python</a-tag>
-        <a-tag color="#6060e2">#javaScript</a-tag>
+        <a-tag color="#9999a7cf">#ES6</a-tag>
+        <a-tag color="#9999a7cf">#python</a-tag>
+        <a-tag color="#9999a7cf">#javaScript</a-tag>
       </div>
 
       <div v-html="markdownHtml" class="markdown-body"></div>
@@ -69,11 +69,12 @@ onMounted(() => {
   width: 100vw;
   background-color: #bb98987a;
   padding-top: 30px;
+  overflow: auto;
 }
 .markdown-html {
   width: 1100px;
   margin: auto;
-  height: calc(100% - 40px);
+  min-height: calc(100% - 40px);
   border-radius: 4px;
   overflow: hidden;
   box-sizing: border-box;
@@ -81,7 +82,7 @@ onMounted(() => {
   padding: 15px 0px;
 
   .title {
-    color: #ff2323;
+    color: #330707;
     margin-bottom: 4px;
     font-size: 28px;
     font-weight: 600;
@@ -102,9 +103,8 @@ onMounted(() => {
   }
 
   .markdown-body {
-    overflow: auto;
     height: calc(100% - 100px);
-    padding: 10px 0px 0 30px;
+    padding: 0px 0px 0 20px;
   }
 }
 </style>

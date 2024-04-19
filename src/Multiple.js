@@ -62,6 +62,18 @@ function init(body) {
         ?.split(" ")
         ?.every((v) => v != activeClassName)
     ) {
+      let isDefault = false;
+      for (var value of event.target?.classList.values()) {
+        if (value == defaultClassName) {
+          isDefault = true;
+          break;
+        }
+      }
+      if (!isDefault) {
+        activeList.value = [];
+      }
+
+      event.target?.classList;
       if (list) {
         for (let i of list) {
           let is = false;
@@ -157,8 +169,10 @@ function init(body) {
 }
 
 let activeClassName = "";
-export function cxf_Multiple(data, array) {
+let defaultClassName = "";
+export function cxf_Multiple(data, defaultData, array) {
   activeClassName = data;
+  defaultClassName = defaultData;
   init(document);
   activeList = array;
 }

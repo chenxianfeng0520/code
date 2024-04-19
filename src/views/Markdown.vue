@@ -1,26 +1,15 @@
 <script setup>
 import * as monaco from "monaco-editor";
-import DownToTopTip from "@/components/downToTopTip.vue";
 import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
-import {
-  EyeOutlined,
-  FormOutlined,
-  TableOutlined,
-  PictureOutlined,
-  SendOutlined,
-  EyeInvisibleOutlined,
-} from "@ant-design/icons-vue";
-import * as marked from "marked";
-import "github-markdown-css/github-markdown-light.css";
-
+import { EyeOutlined, SendOutlined } from "@ant-design/icons-vue";
 import { useRoute, useRouter } from "vue-router";
-
 import { message } from "ant-design-vue";
 
 const route = useRoute();
 const router = useRouter();
 const title = ref("");
 const initInfo = ref(null);
+
 async function getInfo() {
   initInfo.value = null;
   if (route.query.id) {
@@ -31,21 +20,10 @@ async function getInfo() {
     title.value = res.data.data?.[0]?.name;
   }
 }
+
 const value = "";
 const containerRef = ref();
 let editor = null;
-
-var rendererMD = new marked.Renderer();
-marked.marked.setOptions({
-  renderer: rendererMD,
-  gfm: true,
-  tables: true,
-  breaks: false,
-  pedantic: false,
-  sanitize: false,
-  smartLists: true,
-  smartypants: false,
-});
 
 onMounted(async () => {
   await getInfo();
@@ -54,10 +32,6 @@ onMounted(async () => {
     language: "markdown",
     automaticLayout: true,
     theme: "vs-dark",
-  });
-  markdownHtml.value = marked.marked(initInfo.value || value);
-  editor.onDidChangeModelContent(() => {
-    markdownHtml.value = marked.marked(editor.getValue());
   });
   window.addEventListener("keydown", handleKeyDown);
 });
@@ -76,29 +50,27 @@ function handleKeyDown(event) {
   }
 }
 
-const markdownHtml = ref("");
-
-function onAddBlog() {
+async function onAddBlog() {
   if (!title.value?.length) {
-    message.error("名称不可为空");
+    message.error("博文名称不可为空");
     return false;
   }
   if (route.query.id) {
-    updateBlog({
+    await updateBlog({
       name: title.value,
       content_text: editor.getValue(),
       id: route.query.id,
     });
-    message.success("博客修改成功");
+    message.success("发布成功");
   } else {
-    addBlog({
+    await addBlog({
       name: title.value,
       content_text: editor.getValue(),
     });
     router.push({
       path: "/back",
     });
-    message.success("博客新增成功");
+    message.success("发布成功");
   }
 }
 </script>
@@ -107,6 +79,7 @@ function onAddBlog() {
     <button
       type="button"
       class="btn btn-primary editor-btn animate__animated animate__zoomInDown"
+      @click="onPreview()"
     >
       <EyeOutlined />
       <span>预览</span>
@@ -122,7 +95,7 @@ function onAddBlog() {
     <a-input
       class="title animate__animated animate__zoomInDown"
       v-model:value="title"
-      placeholder="博客标题"
+      placeholder="博文标题"
     ></a-input>
     <div class="monaco-editor-editor animate__animated animate__zoomInUp">
       <div ref="containerRef" style="height: 100%; width: 100%"></div>
@@ -143,9 +116,9 @@ function onAddBlog() {
   left: 50%;
   margin-left: -600px;
   margin-top: -390px;
-  border-radius: 0px;
+  border-radius: 4px;
   overflow: hidden;
-  padding: 10px;
+  padding: 20px 10px;
   box-sizing: border-box;
   background-color: #1e1e1e;
 }

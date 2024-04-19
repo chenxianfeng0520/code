@@ -62,7 +62,7 @@ function getConent(item) {
 }
 
 onMounted(() => {
-  cxf_Multiple("cxf", activeList);
+  cxf_Multiple("cxf", "cxf_button", activeList);
 });
 </script>
 
