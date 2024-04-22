@@ -2,7 +2,7 @@
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
 import { BookOutlined } from "@ant-design/icons-vue";
-import { getBlog, deleteBlog } from "@/api/mysql.js";
+import { getBlog, deleteBlog, updateBlog } from "@/api/mysql.js";
 import { message } from "ant-design-vue";
 const router = useRouter();
 function toPage(pagekey, item) {
@@ -65,7 +65,34 @@ async function onDelete(item) {
     id: item.id,
   });
   getBlogList();
-  message.success("博客删除成功");
+  message.success("博文删除成功");
+}
+
+async function onPublish(item,publish){
+  if(item.publish == 1){
+    await updateBlog({
+      publish:2,
+      id: item.id,
+    });
+    router.push({
+      path: "/back",
+    });
+    message.success("博文发布成功");
+  }
+
+  if(item.publish == 2){
+    await updateBlog({
+      publish:1,
+      id: item.id,
+    });
+    router.push({
+      path: "/back",
+    });
+    message.success("博文撤回成功");
+  }
+
+  getBlogList();
+
 }
 const minioType = ref("minio_front");
 function minioBack() {
@@ -175,6 +202,7 @@ function onSee(item) {
           publish_1: item.publish == 1,
           publish_2: item.publish == 2,
         }"
+        @click.stop="onPublish(item)"
         >{{ publishList[item.publish] }}</a-button
       >
       <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
@@ -285,17 +313,22 @@ function onSee(item) {
     span {
       display: block;
     }
-    .delete {
-      padding-left: 10px;
+    button {
+      padding-left: 1px;
+      padding-top: 8px;
     }
     .publish {
       &.publish_1 {
         color: #29d15c;
       }
       &.publish_2 {
-        color: #2b5bc1;
+        color: #ebd974;
+        &:hover {
+          color: #f3e8ad;
+        }
       }
     }
+
   }
 
   .minio {

@@ -15,7 +15,7 @@ function init(body) {
     dom.style.position = "fixed";
     dom.style.top = Y + "px";
     dom.style.left = X + "px";
-    dom.style.backgroundColor = "#a1c1dd57";
+    dom.style.backgroundColor = "#3e7fb936";
     dom.style.border = "1px solid #1e446557";
     document.body.appendChild(dom);
   }

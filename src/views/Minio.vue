@@ -2,7 +2,7 @@
 import { getList, getFileByName, deleteFileByName } from "@/api/minio.js";
 import { cxf_Multiple } from "@/Multiple.js";
 import { useRouter } from "vue-router";
-import { CloseOutlined, ToTopOutlined } from "@ant-design/icons-vue";
+import { CloseSquareOutlined, ToTopOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import { onMounted } from "vue";
 
@@ -86,8 +86,8 @@ onMounted(() => {
     v-show="activeList?.length"
     @click.stop="deleteInfo"
   >
-    <CloseOutlined />
-    <span>删除</span>
+  <CloseSquareOutlined />
+    <span>删除全部</span>
   </a-button>
   <div class="main-page">
     <a-spin tip="minio列表加载中" v-if="loading" />
@@ -121,9 +121,9 @@ onMounted(() => {
 </template>
 <style lang="scss" scoped>
 .main-page {
-  padding: 80px 80px;
+  padding: 80px 60px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 20px));
+  grid-template-columns: repeat(auto-fill, calc(20% - 20px));
   grid-column-gap: 20px;
   cursor: pointer;
 
@@ -131,7 +131,7 @@ onMounted(() => {
     font-size: 16px;
     line-height: 22px;
     color: #cedeff;
-    border-radius: 10px;
+    border-radius: 8px;
     height: 90px;
     font-family: sans-serif;
     margin-bottom: 20px;
@@ -163,9 +163,9 @@ onMounted(() => {
     }
 
     &.file {
-      background-color: #2c2b2b30;
+      background-color: #2b2a2a1a;
       &.cxf_multiple_active {
-        border-radius: 10px;
+        border-radius: 8px;
         background-color: #30c54647;
       }
     }

@@ -1,7 +1,7 @@
 <script setup>
 import * as monaco from "monaco-editor";
 import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
-import { EyeOutlined, SendOutlined } from "@ant-design/icons-vue";
+import { EyeOutlined, SendOutlined,SaveOutlined } from "@ant-design/icons-vue";
 import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 
@@ -60,12 +60,40 @@ async function onAddBlog() {
       name: title.value,
       content_text: editor.getValue(),
       id: route.query.id,
+      publish: 1
+    });
+    message.success("保存成功");
+  } else {
+    await addBlog({
+      name: title.value,
+      content_text: editor.getValue(),
+      publish: 1
+    });
+    router.push({
+      path: "/back",
+    });
+    message.success("保存成功");
+  }
+}
+
+async function onPublishBlog(){
+  if (!title.value?.length) {
+    message.error("博文名称不可为空");
+    return false;
+  }
+  if (route.query.id) {
+    await updateBlog({
+      name: title.value,
+      content_text: editor.getValue(),
+      id: route.query.id,
+      publish: 2
     });
     message.success("发布成功");
   } else {
     await addBlog({
       name: title.value,
       content_text: editor.getValue(),
+      publish: 2
     });
     router.push({
       path: "/back",
@@ -78,7 +106,7 @@ async function onAddBlog() {
   <div class="markdown_page">
     <button
       type="button"
-      class="btn btn-primary editor-btn animate__animated animate__zoomInDown"
+      class="btn btn-primary p_btn animate__animated animate__zoomInDown"
       @click="onPreview()"
     >
       <EyeOutlined />
@@ -86,8 +114,16 @@ async function onAddBlog() {
     </button>
     <button
       type="button"
-      class="btn btn-success yulang animate__animated animate__zoomInDown"
+      class="btn btn-secondary save_btn animate__animated animate__zoomInDown"
       @click="onAddBlog"
+    >
+    <SaveOutlined />
+      <span>保存</span>
+    </button>
+    <button
+      type="button"
+      class="btn btn-success add_btn animate__animated animate__zoomInDown"
+      @click="onPublishBlog"
     >
       <SendOutlined />
       <span>发布</span>
@@ -95,7 +131,7 @@ async function onAddBlog() {
     <a-input
       class="title animate__animated animate__zoomInDown"
       v-model:value="title"
-      placeholder="博文标题"
+      placeholder="点击输入博文标题"
     ></a-input>
     <div class="monaco-editor-editor animate__animated animate__zoomInUp">
       <div ref="containerRef" style="height: 100%; width: 100%"></div>
@@ -106,7 +142,7 @@ async function onAddBlog() {
 .markdown_page {
   height: 100vh;
   width: 100vw;
-  background-color: #716b6b7a;
+  background-color: #4d4a4a66;
 }
 .monaco-editor-editor {
   width: 1200px;
@@ -115,25 +151,42 @@ async function onAddBlog() {
   top: 50%;
   left: 50%;
   margin-left: -600px;
-  margin-top: -390px;
-  border-radius: 4px;
+  margin-top: -384px;
+  border-radius: 8px;
   overflow: hidden;
-  padding: 20px 10px;
+  padding: 12px 4px;
   box-sizing: border-box;
-  background-color: #1e1e1e;
+  background-color: #1e1e1ee8;
 }
 
 .title {
-  position: fixed;
-  right: 460px;
-  top: 20px;
-  width: 990px;
-  height: 38px;
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  margin-left: -600px;
+  width: 1200px;
+  height: 46px;
+  border-radius: 0px;
+  font-size: 20px;
+  color: #fff;
+  padding: 5px 16px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-bottom: 2px solid transparent;
+  &:focus {
+    outline: none;
+    border-bottom: 2px solid #e47f2cc7;
+  }
+  &::placeholder {
+    opacity: 0.5;
+    color: rgb(182, 135, 135);
+  }
 }
 
-.yulang {
+.add_btn {
   position: fixed;
-  right: 250px;
+  right: 20px;
   top: 20px;
 
   span {
@@ -143,9 +196,9 @@ async function onAddBlog() {
   }
 }
 
-.editor-btn {
+.p_btn {
   position: fixed;
-  right: 350px;
+  right: 220px;
   top: 20px;
 
   span {
@@ -155,21 +208,9 @@ async function onAddBlog() {
   }
 }
 
-.pic-btn {
+.save_btn {
   position: fixed;
-  right: 190px;
-  top: 20px;
-
-  span {
-    vertical-align: middle;
-    display: inline-block;
-    margin: 0 2px;
-  }
-}
-
-.table-btn {
-  position: fixed;
-  right: 240px;
+  right: 120px;
   top: 20px;
 
   span {

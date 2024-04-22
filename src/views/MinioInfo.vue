@@ -52,11 +52,14 @@ getInfo();
 </template>
 <style lang="scss" scoped>
 .main-page {
-  padding: 120px 160px;
+  padding: 60px 60px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #1c1717eb;
   img {
     max-width: 1100px;
     max-height: 1100px;

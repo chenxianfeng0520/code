@@ -28,7 +28,7 @@ const whiteList = ["/blog", "/back"];
   top: 20px;
   width: 32px;
   cursor: pointer;
-  opacity: 0.2;
+  opacity: 0.4;
   &:hover{
     opacity: 1;
   }

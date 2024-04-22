@@ -18,16 +18,19 @@ function toBack() {
 }
 
 const blogList = ref([]);
+const loading = ref(true)
 async function getBlogList() {
+  loading.value = true
   const res = await getBlog();
-  blogList.value = res.data.data || [];
+  blogList.value = res.data.data.filter(v=>v.publish == 2) || [];
+  loading.value = false
 }
 
 getBlogList();
 </script>
 <template>
   <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
-  <div class="main-page">
+  <div class="main-page" v-if="blogList?.length && !loading">
     <a-card
       :bordered="false"
       class="blogging animate__animated animate__pulse"
@@ -38,8 +41,14 @@ getBlogList();
       <a-button class="tag" type="link">#javaScript</a-button>
       <a-button class="tag" type="link">#python</a-button>
       <a-button class="tag" type="link">#ES6</a-button>
-      <div class="desc">- {{ item.name }}</div>
+      <!-- <div class="desc">- {{ item.name }}</div> -->
     </a-card>
+  </div>
+  <div v-if="!blogList?.length && !loading" class="none_data">
+    <div>
+      <img src="@/assets/none_data.png" alt="">
+      <div class="text">暂无数据</div>
+    </div>
   </div>
 </template>
 
@@ -61,9 +70,9 @@ getBlogList();
   .ant-card {
     font-size: 18px;
     line-height: 22px;
-    color: #ff8484;
-    border-radius: 20px;
-    height: 115px;
+    color: #c56464;
+    border-radius: 16px;
+    height: 95px;
     font-family: sans-serif;
     margin-bottom: 60px;
 
@@ -73,7 +82,7 @@ getBlogList();
   }
 
   .blogging {
-    background: 10px 20px / 70px 70px no-repeat url(@/assets/blogging.png),
+    background: 15px 20px / 60px 60px no-repeat url(@/assets/blogging.png),
     #532a5c57;
     .title {
       display: block;
@@ -81,9 +90,8 @@ getBlogList();
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      &:hover {
-        text-decoration: underline;
-      }
+      font-size: 20px;
+      padding-bottom: 3px;
     }
     .tag {
       padding-left: 0px;
@@ -98,6 +106,21 @@ getBlogList();
       overflow: hidden;
       text-overflow: ellipsis;
     }
+  }
+}
+.none_data {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #433c3cbd;
+  .text {
+    text-align: center;
+    font-size: 22px;
+    padding: 50px 0;
+    color: #ffeaeab5;
+    font-style: italic;
   }
 }
 </style>
