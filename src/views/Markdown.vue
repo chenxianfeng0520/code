@@ -106,7 +106,7 @@ async function onAddBlog() {
 .markdown_page {
   height: 100vh;
   width: 100vw;
-  background-color: #bb98987a;
+  background-color: #716b6b7a;
 }
 .monaco-editor-editor {
   width: 1200px;

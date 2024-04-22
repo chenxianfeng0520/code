@@ -131,10 +131,10 @@ onMounted(() => {
     font-size: 16px;
     line-height: 22px;
     color: #cedeff;
-    border-radius: 30px;
+    border-radius: 10px;
     height: 90px;
     font-family: sans-serif;
-    margin-bottom: 60px;
+    margin-bottom: 20px;
     &:hover {
       text-decoration: underline;
     }
@@ -165,7 +165,7 @@ onMounted(() => {
     &.file {
       background-color: #2c2b2b30;
       &.cxf_multiple_active {
-        border-radius: 20px;
+        border-radius: 10px;
         background-color: #30c54647;
       }
     }

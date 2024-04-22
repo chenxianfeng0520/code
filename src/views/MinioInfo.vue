@@ -58,8 +58,8 @@ getInfo();
   justify-content: center;
   align-items: center;
   img {
-    max-width: 1000px;
-    max-height: 1000px;
+    max-width: 1100px;
+    max-height: 1100px;
   }
 }
 </style>

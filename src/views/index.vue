@@ -90,6 +90,20 @@ function blogBack() {
 function blogFront() {
   blogType.value = "blog_front";
 }
+
+const publishList = {
+  1: "发布",
+  2: "撤回",
+};
+
+function onSee(item) {
+  router.push({
+    path: "/blogInfo",
+    query: {
+      id: item.id,
+    },
+  });
+}
 </script>
 <template>
   <img class="back" src="@/assets/back.png" alt="" @click="toBack" />
@@ -153,8 +167,18 @@ function blogFront() {
       v-if="blogType == 'blog_front'"
     >
       <span>{{ item.name }}</span>
+      <a-button type="link" @click.stop="onSee(item)">查看</a-button>
+      <a-button
+        type="link"
+        :class="{
+          publish: true,
+          publish_1: item.publish == 1,
+          publish_2: item.publish == 2,
+        }"
+        >{{ publishList[item.publish] }}</a-button
+      >
       <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
-        >- 删除博文 -</a-button
+        >删除</a-button
       >
     </a-card>
     <a-card
@@ -212,22 +236,18 @@ function blogFront() {
 .main-page {
   padding: 100px 100px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 50px));
-  grid-column-gap: 50px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 30px));
+  grid-column-gap: 30px;
   cursor: pointer;
 
   .ant-card {
     font-size: 18px;
     line-height: 22px;
     color: #d8dfee;
-    border-radius: 20px;
+    border-radius: 12px;
     height: 90px;
     font-family: sans-serif;
-    margin-bottom: 60px;
-
-    &:hover {
-      text-decoration: underline;
-    }
+    margin-bottom: 30px;
 
     :deep(.ant-card-body) {
       padding: 20px 15px 0 100px;
@@ -236,43 +256,51 @@ function blogFront() {
 
   .experiment {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .suiji {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/suiji.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .Docker {
     background: 10px 15px / 90px 90px no-repeat url(@/assets/Docker.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .Monaco {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/experiment.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .markdown {
     background: 0px 25px / 100px 70px no-repeat url(@/assets/markdown.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .blog {
-    background: 10px 15px / 90px 90px no-repeat url(@/assets/blog.png),
-      #2c2b2b30;
+    background: 10px 13px / 70px 70px no-repeat url(@/assets/blog.png),
+      #2c2b2bf5;
     span {
       display: block;
     }
     .delete {
       padding-left: 10px;
     }
+    .publish {
+      &.publish_1 {
+        color: #29d15c;
+      }
+      &.publish_2 {
+        color: #2b5bc1;
+      }
+    }
   }
 
   .minio {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
-      #2c2b2b30;
+      #2c2b2bf5;
   }
 
   .excel {
