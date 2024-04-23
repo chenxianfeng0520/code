@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
-import { PlusSquareOutlined } from "@ant-design/icons-vue";
+import { PlusSquareOutlined, CheckCircleOutlined } from "@ant-design/icons-vue";
 import { getBlog, deleteBlog, updateBlog } from "@/api/mysql.js";
 import { message } from "ant-design-vue";
 const router = useRouter();
@@ -190,10 +190,19 @@ function onSee(item) {
       class="blog animate__animated animate__bounceIn"
       v-for="item in blogList"
       v-if="blogType == 'blog_front'"
+      :class="{ publish: item.publish == 2 }"
     >
-      <span>{{ item.name }}</span>
+      <div class="title">
+        <span class="name">{{ item.name }}</span>
+        <CheckCircleOutlined v-if="item.publish == 2" class="icon" />
+      </div>
       <a-button type="link" @click.stop="onSee(item)">查看</a-button>
-      <a-button type="link" @click.stop="toPage(7, item)">修改</a-button>
+      <a-button
+        type="link"
+        @click.stop="toPage(7, item)"
+        v-if="item.publish != 2"
+        >修改</a-button
+      >
       <a-button
         type="link"
         :class="{
@@ -204,7 +213,12 @@ function onSee(item) {
         @click.stop="onPublish(item)"
         >{{ publishList[item.publish] }}</a-button
       >
-      <a-button type="link" danger class="delete" @click.stop="onDelete(item)"
+      <a-button
+        type="link"
+        danger
+        class="delete"
+        @click.stop="onDelete(item)"
+        v-if="item.publish != 2"
         >删除</a-button
       >
     </a-card>
@@ -319,10 +333,28 @@ function onSee(item) {
   }
 
   .blog {
-    background: 10px 13px / 70px 70px no-repeat url(@/assets/blog.png),
+    background: 10px 11px / 70px 70px no-repeat url(@/assets/blog.png),
       #2c2b2bf5;
-    span {
-      display: block;
+    .title {
+      .name {
+        vertical-align: middle;
+        display: inline-block;
+        margin: 0 4px 0 0;
+        width: calc(100% - 90px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .icon {
+        vertical-align: middle;
+        display: inline-block;
+        font-size: 16px;
+      }
+    }
+    &.publish {
+      background: 10px 11px / 70px 70px no-repeat url(@/assets/blog.png),
+        #0c3e1ff5;
+      color: #19ff95;
     }
     button {
       padding-left: 1px;

@@ -84,7 +84,7 @@ getBlogList();
 
   .blogging {
     background: 15px 20px / 60px 60px no-repeat url(@/assets/blogging.png),
-    #464447a8;
+    #3d0a57a8;
     .title {
       display: block;
       width: 100%;
