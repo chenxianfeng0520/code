@@ -340,7 +340,7 @@ function onSee(item) {
         vertical-align: middle;
         display: inline-block;
         margin: 0 4px 0 0;
-        width: calc(100% - 90px);
+        max-width: calc(100% - 90px);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

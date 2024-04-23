@@ -1,9 +1,16 @@
 <script setup>
 import * as monaco from "monaco-editor";
 import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
-import { EyeOutlined, SendOutlined, SaveOutlined } from "@ant-design/icons-vue";
+import {
+  EyeOutlined,
+  SendOutlined,
+  SaveOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons-vue";
 import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
+import * as marked from "marked";
+import "github-markdown-css/github-markdown-light.css";
 
 const route = useRoute();
 const router = useRouter();
@@ -104,7 +111,25 @@ async function onPublishBlog() {
   }
 }
 
-async function onPreview(item) {}
+const markdownHtml = ref("");
+const isPreview = ref(false);
+
+var rendererMD = new marked.Renderer();
+marked.marked.setOptions({
+  renderer: rendererMD,
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+});
+
+async function onPreview(item) {
+  markdownHtml.value = marked.marked(editor.getValue());
+  isPreview.value = true;
+}
 </script>
 <template>
   <div class="markdown_page">
@@ -116,14 +141,14 @@ async function onPreview(item) {}
       <SaveOutlined />
       <span>保存</span>
     </button>
-    <!-- <button
+    <button
       type="button"
       class="btn btn-primary p_btn animate__animated animate__zoomInDown"
       @click="onPreview()"
     >
       <EyeOutlined />
       <span>预览</span>
-    </button> -->
+    </button>
     <button
       type="button"
       class="btn btn-success add_btn animate__animated animate__zoomInDown"
@@ -140,9 +165,73 @@ async function onPreview(item) {}
     <div class="monaco-editor-editor animate__animated animate__zoomInUp">
       <div ref="containerRef" style="height: 100%; width: 100%"></div>
     </div>
+
+    <div class="preview_box" v-if="isPreview">
+      <div class="preview_html">
+        <h1 class="preview_title">
+          <span>{{ title }}</span>
+        </h1>
+        <div class="preview_body" v-html="markdownHtml"></div>
+      </div>
+    </div>
+    <CloseCircleOutlined
+      v-if="isPreview"
+      class="close animate__animated animate__backInLeft"
+      @click="isPreview = false"
+    />
   </div>
 </template>
 <style lang="scss" scoped>
+.close {
+  position: fixed;
+  left: 80px;
+  top: 22px;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
+.preview_box {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: #2d2626e0;
+  padding-top: 30px;
+  overflow: auto;
+  .preview_html {
+    width: 1100px;
+    margin: auto;
+    border-radius: 0px;
+    overflow: hidden;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    padding: 20px 0px 30px 0px;
+
+    .preview_title {
+      color: #69c;
+      margin-bottom: 4px;
+      font-size: 23px;
+      font-weight: 600;
+      word-break: break-all;
+      word-wrap: break-word;
+      padding: 4px 30px 5px 1px;
+      border-bottom: 1px dashed #c7c7c7;
+      width: calc(100% - 30px);
+      margin: auto;
+      margin-bottom: 10px;
+
+      span {
+        vertical-align: middle;
+      }
+    }
+
+    .preview_body {
+      height: calc(100% - 100px);
+      padding: 0px 20px 0 20px;
+    }
+  }
+}
 .markdown_page {
   height: 100vh;
   width: 100vw;
@@ -215,7 +304,7 @@ async function onPreview(item) {}
 .save_btn {
   position: fixed;
   left: 20px;
-  bottom: 70px;
+  bottom: 120px;
 
   span {
     vertical-align: middle;
