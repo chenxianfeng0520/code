@@ -72,23 +72,22 @@ onMounted(() => {
     :action="`http://139.224.72.78/minio/uploadObject`"
     :headers="headers"
     @change="handleChange"
-    class="uploadPic animate__animated animate__zoomIn"
+    class="uploadPic animate__animated animate__zoomInDown"
   >
-    <a-button type="primary">
+    <button type="button" class="btn btn-primary">
       <ToTopOutlined />
       <span>新增</span>
-    </a-button>
+    </button>
   </a-upload>
-  <a-button
-    type="primary"
-    danger
-    class="deletePic animate__animated animate__zoomIn"
+  <button
+    type="button"
+    class="btn btn-danger deletePic animate__animated animate__zoomInDown"
     v-show="activeList?.length"
     @click.stop="deleteInfo"
   >
-  <CloseSquareOutlined />
+    <CloseSquareOutlined />
     <span>删除全部</span>
-  </a-button>
+  </button>
   <div class="main-page">
     <a-spin tip="minio列表加载中" v-if="loading" />
     <template v-else>
@@ -174,14 +173,24 @@ onMounted(() => {
 
 .deletePic {
   position: fixed;
-  left: 180px;
-  top: 20px;
+  left: 20px;
+  bottom: 70px;
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
 }
 
 .uploadPic {
   position: fixed;
-  left: 80px;
-  top: 20px;
+  left: 20px;
+  bottom: 20px;
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
 }
 
 :deep(.ant-upload-list) {

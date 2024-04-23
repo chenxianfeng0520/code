@@ -32,15 +32,18 @@ const markdownHtml = ref("");
 
 const title = ref("");
 const initInfo = ref(null);
+const loading = ref(true);
 async function getInfo() {
   initInfo.value = null;
   if (route.query.id) {
+    loading.value = true;
     const res = await getBlogById({
       id: route.query.id,
     });
     initInfo.value = res.data.data?.[0]?.content_text;
     title.value = res.data.data?.[0]?.name;
     markdownHtml.value = marked.marked(initInfo.value);
+    loading.value = false;
   }
 }
 onMounted(() => {
@@ -49,17 +52,20 @@ onMounted(() => {
 </script>
 <template>
   <div class="bloginfo_page">
-    <div class="markdown-html animate__animated animate__bounceIn">
+    <div
+      class="markdown-html animate__animated animate__bounceIn"
+    >
       <h1 class="title">
         <span>{{ title }}</span>
+        <a-spin v-show="loading" />
       </h1>
-      <div class="tagList">
+      <!-- <div class="tagList">
         <a-tag color="#7c7cffde">#ES6</a-tag>
         <a-tag color="#7c7cffde">#python</a-tag>
         <a-tag color="#7c7cffde">#javaScript</a-tag>
-      </div>
+      </div> -->
 
-      <div v-html="markdownHtml" class="markdown-body"></div>
+      <div v-html="markdownHtml" class="markdown-body" v-show="!loading"></div>
     </div>
   </div>
 </template>
@@ -74,21 +80,24 @@ onMounted(() => {
 .markdown-html {
   width: 1100px;
   margin: auto;
-  min-height: calc(100% - 40px);
   border-radius: 0px;
   overflow: hidden;
   box-sizing: border-box;
   background-color: #ffffff;
-  padding: 15px 0px;
+  padding: 20px 0px 30px 0px;
 
   .title {
-    color: #e40909;
+    color: #69c;
     margin-bottom: 4px;
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 600;
     word-break: break-all;
     word-wrap: break-word;
-    padding: 4px 30px 5px 16px;
+    padding: 4px 30px 5px 1px;
+    border-bottom: 1px dashed #c7c7c7;
+    width: calc(100% - 30px);
+    margin: auto;
+    margin-bottom: 10px;
 
     span {
       vertical-align: middle;
@@ -104,7 +113,7 @@ onMounted(() => {
 
   .markdown-body {
     height: calc(100% - 100px);
-    padding: 0px 0px 0 20px;
+    padding: 0px 20px 0 20px;
   }
 }
 </style>

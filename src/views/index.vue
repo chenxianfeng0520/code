@@ -1,7 +1,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import DownToTopTip from "@/components/downToTopTip.vue";
-import { BookOutlined } from "@ant-design/icons-vue";
+import { PlusSquareOutlined } from "@ant-design/icons-vue";
 import { getBlog, deleteBlog, updateBlog } from "@/api/mysql.js";
 import { message } from "ant-design-vue";
 const router = useRouter();
@@ -68,10 +68,10 @@ async function onDelete(item) {
   message.success("博文删除成功");
 }
 
-async function onPublish(item,publish){
-  if(item.publish == 1){
+async function onPublish(item, publish) {
+  if (item.publish == 1) {
     await updateBlog({
-      publish:2,
+      publish: 2,
       id: item.id,
     });
     router.push({
@@ -80,9 +80,9 @@ async function onPublish(item,publish){
     message.success("博文发布成功");
   }
 
-  if(item.publish == 2){
+  if (item.publish == 2) {
     await updateBlog({
-      publish:1,
+      publish: 1,
       id: item.id,
     });
     router.push({
@@ -92,7 +92,6 @@ async function onPublish(item,publish){
   }
 
   getBlogList();
-
 }
 const minioType = ref("minio_front");
 function minioBack() {
@@ -102,7 +101,7 @@ function minioFront() {
   minioType.value = "minio_front";
 }
 
-const lotteryType = ref("lottery_back");
+const lotteryType = ref("lottery_front");
 function lotteryBack() {
   lotteryType.value = "lottery_back";
 }
@@ -176,25 +175,25 @@ function onSee(item) {
     @click="blogBack"
     v-if="blogType == 'blog_front'"
   />
+  <button
+    type="button"
+    class="btn btn-primary add_btn animate__animated animate__zoomInDown"
+    @click="toPage(4)"
+    v-if="blogType == 'blog_front'"
+  >
+    <PlusSquareOutlined />
+    <span>新建博文</span>
+  </button>
   <div class="main-page">
     <a-card
       :bordered="false"
       class="blog animate__animated animate__bounceIn"
-      @click="toPage(4)"
-      v-if="blogType == 'blog_front'"
-    >
-      <span>新建博文</span>
-    </a-card>
-
-    <a-card
-      :bordered="false"
-      class="blog animate__animated animate__bounceIn"
       v-for="item in blogList"
-      @click="toPage(7, item)"
       v-if="blogType == 'blog_front'"
     >
       <span>{{ item.name }}</span>
       <a-button type="link" @click.stop="onSee(item)">查看</a-button>
+      <a-button type="link" @click.stop="toPage(7, item)">修改</a-button>
       <a-button
         type="link"
         :class="{
@@ -229,6 +228,18 @@ function onSee(item) {
 </template>
 
 <style lang="scss" scoped>
+.add_btn {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+
+  span {
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 2px;
+  }
+}
+
 .back {
   position: fixed;
   right: 20px;
@@ -328,7 +339,6 @@ function onSee(item) {
         }
       }
     }
-
   }
 
   .minio {

@@ -13,7 +13,7 @@ const whiteList = ["/blog", "/back"];
 <template>
   <router-view></router-view>
   <img
-    class="home"
+    class="home animate__animated animate__backInLeft"
     src="@/assets/home.png"
     alt=""
     @click="toBack"
@@ -28,10 +28,6 @@ const whiteList = ["/blog", "/back"];
   top: 20px;
   width: 32px;
   cursor: pointer;
-  opacity: 0.4;
-  &:hover{
-    opacity: 1;
-  }
 }
 #app {
   height: 100vh;

@@ -1,7 +1,7 @@
 <script setup>
 import * as monaco from "monaco-editor";
 import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
-import { EyeOutlined, SendOutlined,SaveOutlined } from "@ant-design/icons-vue";
+import { EyeOutlined, SendOutlined, SaveOutlined } from "@ant-design/icons-vue";
 import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 
@@ -9,6 +9,7 @@ const route = useRoute();
 const router = useRouter();
 const title = ref("");
 const initInfo = ref(null);
+const publish = ref(null);
 
 async function getInfo() {
   initInfo.value = null;
@@ -18,6 +19,7 @@ async function getInfo() {
     });
     initInfo.value = res.data.data?.[0]?.content_text;
     title.value = res.data.data?.[0]?.name;
+    publish.value = res.data.data?.[0]?.publish;
   }
 }
 
@@ -60,14 +62,14 @@ async function onAddBlog() {
       name: title.value,
       content_text: editor.getValue(),
       id: route.query.id,
-      publish: 1
+      publish: 1,
     });
     message.success("保存成功");
   } else {
     await addBlog({
       name: title.value,
       content_text: editor.getValue(),
-      publish: 1
+      publish: 1,
     });
     router.push({
       path: "/back",
@@ -76,7 +78,7 @@ async function onAddBlog() {
   }
 }
 
-async function onPublishBlog(){
+async function onPublishBlog() {
   if (!title.value?.length) {
     message.error("博文名称不可为空");
     return false;
@@ -86,14 +88,14 @@ async function onPublishBlog(){
       name: title.value,
       content_text: editor.getValue(),
       id: route.query.id,
-      publish: 2
+      publish: 2,
     });
     message.success("发布成功");
   } else {
     await addBlog({
       name: title.value,
       content_text: editor.getValue(),
-      publish: 2
+      publish: 2,
     });
     router.push({
       path: "/back",
@@ -101,25 +103,27 @@ async function onPublishBlog(){
     message.success("发布成功");
   }
 }
+
+async function onPreview(item) {}
 </script>
 <template>
   <div class="markdown_page">
     <button
+      type="button"
+      class="btn btn-secondary save_btn animate__animated animate__zoomInDown"
+      @click="onAddBlog"
+    >
+      <SaveOutlined />
+      <span>保存</span>
+    </button>
+    <!-- <button
       type="button"
       class="btn btn-primary p_btn animate__animated animate__zoomInDown"
       @click="onPreview()"
     >
       <EyeOutlined />
       <span>预览</span>
-    </button>
-    <button
-      type="button"
-      class="btn btn-secondary save_btn animate__animated animate__zoomInDown"
-      @click="onAddBlog"
-    >
-    <SaveOutlined />
-      <span>保存</span>
-    </button>
+    </button> -->
     <button
       type="button"
       class="btn btn-success add_btn animate__animated animate__zoomInDown"
@@ -151,7 +155,7 @@ async function onPublishBlog(){
   top: 50%;
   left: 50%;
   margin-left: -600px;
-  margin-top: -384px;
+  margin-top: -390px;
   border-radius: 8px;
   overflow: hidden;
   padding: 12px 4px;
@@ -161,7 +165,7 @@ async function onPublishBlog(){
 
 .title {
   position: absolute;
-  top: 24px;
+  top: 14px;
   left: 50%;
   margin-left: -600px;
   width: 1200px;
@@ -186,8 +190,8 @@ async function onPublishBlog(){
 
 .add_btn {
   position: fixed;
-  right: 20px;
-  top: 20px;
+  left: 20px;
+  bottom: 20px;
 
   span {
     vertical-align: middle;
@@ -198,8 +202,8 @@ async function onPublishBlog(){
 
 .p_btn {
   position: fixed;
-  right: 220px;
-  top: 20px;
+  left: 20px;
+  bottom: 70px;
 
   span {
     vertical-align: middle;
@@ -210,8 +214,8 @@ async function onPublishBlog(){
 
 .save_btn {
   position: fixed;
-  right: 120px;
-  top: 20px;
+  left: 20px;
+  bottom: 70px;
 
   span {
     vertical-align: middle;

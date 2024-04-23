@@ -30,6 +30,7 @@ getBlogList();
 </script>
 <template>
   <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
+  <a-spin v-show="loading" />
   <div class="main-page" v-if="blogList?.length && !loading">
     <a-card
       :bordered="false"
@@ -38,9 +39,9 @@ getBlogList();
       @click="toPage(item)"
     >
       <div class="title">{{ item.name || "-#-" }}</div>
-      <a-button class="tag" type="link">#javaScript</a-button>
+      <!-- <a-button class="tag" type="link">#javaScript</a-button>
       <a-button class="tag" type="link">#python</a-button>
-      <a-button class="tag" type="link">#ES6</a-button>
+      <a-button class="tag" type="link">#ES6</a-button> -->
       <!-- <div class="desc">- {{ item.name }}</div> -->
     </a-card>
   </div>
@@ -61,7 +62,7 @@ getBlogList();
   cursor: pointer;
 }
 .main-page {
-  padding: 80px 70px;
+  padding: 70px 70px;
   display: grid;
   grid-template-columns: repeat(auto-fill, calc(25% - 50px));
   grid-column-gap: 50px;
@@ -70,27 +71,27 @@ getBlogList();
   .ant-card {
     font-size: 18px;
     line-height: 22px;
-    color: #c56464;
+    color: #fff6f6;
     border-radius: 16px;
     height: 95px;
     font-family: sans-serif;
     margin-bottom: 60px;
 
     :deep(.ant-card-body) {
-      padding: 20px 15px 0 90px;
+      padding: 32px 15px 0 90px;
     }
   }
 
   .blogging {
     background: 15px 20px / 60px 60px no-repeat url(@/assets/blogging.png),
-    #532a5c57;
+    #464447a8;
     .title {
       display: block;
       width: 100%;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 20px;
+      font-size: 16px;
       padding-bottom: 3px;
     }
     .tag {
