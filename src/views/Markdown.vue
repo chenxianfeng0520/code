@@ -166,7 +166,7 @@ async function onPreview(item) {
       <div ref="containerRef" style="height: 100%; width: 100%"></div>
     </div>
 
-    <div class="preview_box" v-if="isPreview">
+    <div class="preview_box animate__animated animate__zoomInDown" v-if="isPreview">
       <div class="preview_html">
         <h1 class="preview_title">
           <span>{{ title }}</span>

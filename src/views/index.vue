@@ -47,9 +47,12 @@ function toPage(pagekey, item) {
 }
 
 const blogList = ref([]);
+const loading = ref(true);
 async function getBlogList() {
+  loading.value = true;
   const res = await getBlog();
   blogList.value = res.data.data || [];
+  loading.value = false;
 }
 
 getBlogList();
@@ -191,6 +194,7 @@ function onSee(item) {
       v-for="item in blogList"
       v-if="blogType == 'blog_front'"
       :class="{ publish: item.publish == 2 }"
+      v-show="!loading"
     >
       <div class="title">
         <span class="name">{{ item.name }}</span>
@@ -222,6 +226,7 @@ function onSee(item) {
         >删除</a-button
       >
     </a-card>
+    <a-spin v-show="loading" />
     <a-card
       :bordered="false"
       class="experiment animate__animated animate__bounceIn"
