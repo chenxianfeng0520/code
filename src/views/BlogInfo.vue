@@ -73,7 +73,7 @@ onMounted(() => {
 .bloginfo_page {
   height: 100vh;
   width: 100vw;
-  background-color: #716b6b7a;
+  background-color: #050303a8;
   padding-top: 30px;
   overflow: auto;
 }

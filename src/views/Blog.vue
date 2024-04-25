@@ -62,7 +62,7 @@ getBlogList();
   cursor: pointer;
 }
 .main-page {
-  padding: 70px 70px;
+  padding: 50px 50px;
   display: grid;
   grid-template-columns: repeat(auto-fill, calc(25% - 50px));
   grid-column-gap: 50px;

@@ -292,7 +292,7 @@ function onSee(item) {
 }
 
 .main-page {
-  padding: 70px 70px;
+  padding: 50px 50px;
   display: grid;
   grid-template-columns: repeat(auto-fill, calc(25% - 30px));
   grid-column-gap: 30px;
