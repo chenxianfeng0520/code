@@ -215,6 +215,13 @@ async function onSubmitSelectPic() {
     >
       <div class="preview_html">
         <h1 class="preview_title">
+          <span class="logo">
+            <a-image
+              :src="`http://139.224.72.78:9000/picturegallery/${blogInfo?.cover}`"
+              :preview="false"
+              v-show="!loading"
+            />
+          </span>
           <span>{{ title }}</span>
         </h1>
         <div class="preview_body" v-html="markdownHtml"></div>
@@ -290,6 +297,15 @@ async function onSubmitSelectPic() {
 
       span {
         vertical-align: middle;
+      }
+
+      .logo {
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        :deep(.ant-image) {
+          vertical-align: middle;
+        }
       }
     }
 

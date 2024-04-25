@@ -133,6 +133,17 @@ function onSee(item) {
     },
   });
 }
+
+function getBackground(data) {
+  let color = "#2c2b2bf5";
+  if (data.publish == 2) {
+    color = "#0c3e1ff5";
+  }
+  if (data.cover) {
+    return `10px 11px / 70px 70px no-repeat url(http://139.224.72.78:9000/picturegallery/${data.cover}),${color}`;
+  }
+  return "";
+}
 </script>
 <template>
   <img class="back" src="@/assets/back.png" alt="" @click="toBack" />
@@ -192,13 +203,10 @@ function onSee(item) {
       :bordered="false"
       class="blog animate__animated animate__bounceIn"
       :style="{
-        background:
-          item.cover &&
-          `10px 11px / 70px 70px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#2c2b2bf5;`,
+        background: getBackground(item),
       }"
       v-for="item in blogList"
       v-if="blogType == 'blog_front'"
-      :class="{ publish: item.publish == 2 }"
       v-show="!loading"
     >
       <div class="title">

@@ -41,7 +41,7 @@ getBlogList();
       :style="{
         background:
           item.cover &&
-          `15px 20px / 60px 60px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#3d0a57a8;`,
+          `15px 20px / 60px 60px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#3d0a57a8`,
       }"
     >
       <div class="title">{{ item.name || "-#-" }}</div>

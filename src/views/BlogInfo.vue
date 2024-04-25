@@ -33,6 +33,8 @@ const markdownHtml = ref("");
 const title = ref("");
 const initInfo = ref(null);
 const loading = ref(true);
+const blogInfo = ref(null);
+
 async function getInfo() {
   initInfo.value = null;
   if (route.query.id) {
@@ -43,6 +45,7 @@ async function getInfo() {
     initInfo.value = res.data.data?.[0]?.content_text;
     title.value = res.data.data?.[0]?.name;
     markdownHtml.value = marked.marked(initInfo.value);
+    blogInfo.value = res.data.data?.[0];
     loading.value = false;
   }
 }
@@ -52,11 +55,16 @@ onMounted(() => {
 </script>
 <template>
   <div class="bloginfo_page">
-    <div
-      class="markdown-html animate__animated animate__bounceIn"
-    >
+    <div class="markdown-html animate__animated animate__bounceIn">
       <h1 class="title">
-        <span>{{ title }}</span>
+        <span class="logo">
+          <a-image
+            :src="`http://139.224.72.78:9000/picturegallery/${blogInfo?.cover}`"
+            :preview="false"
+            v-show="!loading"
+          />
+        </span>
+        <span v-show="!loading">{{ title }}</span>
         <a-spin v-show="loading" />
       </h1>
       <!-- <div class="tagList">
@@ -101,6 +109,14 @@ onMounted(() => {
 
     span {
       vertical-align: middle;
+    }
+    .logo {
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      :deep(.ant-image){
+        vertical-align: middle;
+      }
     }
   }
 
