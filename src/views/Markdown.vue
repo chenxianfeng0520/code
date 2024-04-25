@@ -4,19 +4,22 @@ import { addBlog, updateBlog, getBlogById } from "@/api/mysql.js";
 import {
   EyeOutlined,
   SendOutlined,
-  SaveOutlined,
+  DeliveredProcedureOutlined,
   CloseCircleOutlined,
+  PictureOutlined,
 } from "@ant-design/icons-vue";
 import { useRoute, useRouter } from "vue-router";
 import { message } from "ant-design-vue";
 import * as marked from "marked";
 import "github-markdown-css/github-markdown-light.css";
+import SelectPic from "./SelectPic.vue";
 
 const route = useRoute();
 const router = useRouter();
 const title = ref("");
 const initInfo = ref(null);
 const publish = ref(null);
+const blogInfo = ref(null);
 
 async function getInfo() {
   initInfo.value = null;
@@ -27,6 +30,7 @@ async function getInfo() {
     initInfo.value = res.data.data?.[0]?.content_text;
     title.value = res.data.data?.[0]?.name;
     publish.value = res.data.data?.[0]?.publish;
+    blogInfo.value = res.data.data?.[0];
   }
 }
 
@@ -130,15 +134,54 @@ async function onPreview(item) {
   markdownHtml.value = marked.marked(editor.getValue());
   isPreview.value = true;
 }
+
+const isSelectPic = ref(false);
+async function close() {
+  isSelectPic.value = false;
+  isPreview.value = false;
+}
+
+function onSelectPic() {
+  isSelectPic.value = true;
+}
+const coverPic = ref(null);
+async function changeSelectPic(data) {
+  coverPic.value = data;
+}
+
+async function onSubmitSelectPic() {
+  await updateBlog({
+    id: route.query.id,
+    cover: coverPic.value,
+  });
+  message.success("封面修改成功");
+  if (route.query.id) {
+    blogInfo.value.cover = coverPic.value;
+  }
+  close();
+}
 </script>
 <template>
   <div class="markdown_page">
+    <div
+      class="cover_pic animate__animated animate__zoomInDown"
+      v-if="route.query.id"
+      @click="onSelectPic"
+    >
+      <a-image
+        :src="`http://139.224.72.78:9000/picturegallery/${blogInfo?.cover}`"
+        v-if="blogInfo?.cover"
+        :preview="false"
+      >
+      </a-image>
+      <span v-if="!blogInfo?.cover">选择封面</span>
+    </div>
     <button
       type="button"
       class="btn btn-secondary save_btn animate__animated animate__zoomInDown"
       @click="onAddBlog"
     >
-      <SaveOutlined />
+      <DeliveredProcedureOutlined />
       <span>保存</span>
     </button>
     <button
@@ -166,7 +209,10 @@ async function onPreview(item) {
       <div ref="containerRef" style="height: 100%; width: 100%"></div>
     </div>
 
-    <div class="preview_box animate__animated animate__zoomInDown" v-if="isPreview">
+    <div
+      class="popups_box animate__animated animate__zoomInDown"
+      v-if="isPreview"
+    >
       <div class="preview_html">
         <h1 class="preview_title">
           <span>{{ title }}</span>
@@ -174,11 +220,25 @@ async function onPreview(item) {
         <div class="preview_body" v-html="markdownHtml"></div>
       </div>
     </div>
+    <div
+      class="popups_box animate__animated animate__zoomInDown"
+      v-if="isSelectPic"
+    >
+      <SelectPic @change="changeSelectPic"></SelectPic>
+    </div>
     <CloseCircleOutlined
-      v-if="isPreview"
+      v-if="isPreview || isSelectPic"
       class="close animate__animated animate__backInLeft"
-      @click="isPreview = false"
+      @click="close"
     />
+    <button
+      type="button"
+      class="btn btn-success submit animate__animated animate__backInLeft"
+      @click="onSubmitSelectPic"
+      v-if="isSelectPic && coverPic"
+    >
+      <span>确定</span>
+    </button>
   </div>
 </template>
 <style lang="scss" scoped>
@@ -190,13 +250,20 @@ async function onPreview(item) {
   color: #fff;
   cursor: pointer;
 }
-.preview_box {
+.submit {
+  position: fixed;
+  left: 130px;
+  top: 18px;
+  color: #fff;
+  cursor: pointer;
+}
+.popups_box {
   position: fixed;
   left: 0px;
   top: 0px;
   height: 100vh;
   width: 100vw;
-  background-color: #2d2626e0;
+  background-color: #201b1be0;
   padding-top: 30px;
   overflow: auto;
   .preview_html {
@@ -310,6 +377,32 @@ async function onPreview(item) {
     vertical-align: middle;
     display: inline-block;
     margin: 0 2px;
+  }
+}
+
+.cover_pic {
+  position: fixed;
+  left: 20px;
+  bottom: 170px;
+
+  width: 70px;
+  height: auto;
+  height: 70px;
+  background-color: #49494954;
+  border: 1px solid #635656a1;
+  border-radius: 50%;
+  padding: 4px;
+
+  cursor: pointer;
+  span {
+    font-size: 14px;
+    color: #c0a5a5a1;
+    display: block;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>

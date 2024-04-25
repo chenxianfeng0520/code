@@ -191,6 +191,11 @@ function onSee(item) {
     <a-card
       :bordered="false"
       class="blog animate__animated animate__bounceIn"
+      :style="{
+        background:
+          item.cover &&
+          `10px 11px / 70px 70px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#2c2b2bf5;`,
+      }"
       v-for="item in blogList"
       v-if="blogType == 'blog_front'"
       :class="{ publish: item.publish == 2 }"
