@@ -30,36 +30,45 @@ async function getBlogList() {
 getBlogList();
 </script>
 <template>
-  <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
-  <a-spin v-show="loading" />
-  <div class="main-page" v-if="blogList?.length && !loading">
-    <a-card
-      :bordered="false"
-      class="blogging animate__animated animate__pulse"
-      v-for="item in blogList"
-      @click="toPage(item)"
-      :style="{
-        background:
-          item.cover &&
-          `15px 20px / 60px 60px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#3d0a57a8`,
-      }"
-    >
-      <div class="title">{{ item.name || "-#-" }}</div>
-      <!-- <a-button class="tag" type="link">#javaScript</a-button>
-      <a-button class="tag" type="link">#python</a-button>
-      <a-button class="tag" type="link">#ES6</a-button> -->
-      <!-- <div class="desc">- {{ item.name }}</div> -->
-    </a-card>
-  </div>
-  <div v-if="!blogList?.length && !loading" class="none_data">
-    <div>
-      <img src="@/assets/none_data.png" alt="" />
-      <div class="text">暂无数据</div>
+  <div class="blog_index">
+    <img class="back" src="@/assets/front.png" alt="" @click="toBack" />
+    <a-spin v-show="loading" />
+    <div class="main-page" v-if="blogList?.length && !loading">
+      <a-card
+        :bordered="false"
+        class="blogging animate__animated animate__pulse"
+        v-for="item in blogList"
+        @click="toPage(item)"
+        :style="{
+          background:
+            item.cover &&
+            `10px 5px / 110px 110px no-repeat url(http://139.224.72.78:9000/picturegallery/${item.cover}),#313e39d6`,
+        }"
+      >
+        <div class="title">{{ item.name || "-#-" }}</div>
+        <a-button class="tag" type="link">#javaScript</a-button>
+        <a-button class="tag" type="link">#python</a-button>
+        <a-button class="tag" type="link">#ES6</a-button>
+        <!-- <div class="desc">- {{ item.name }}</div> -->
+      </a-card>
+    </div>
+    <div v-if="!blogList?.length && !loading" class="none_data">
+      <div>
+        <img src="@/assets/none_data.png" alt="" />
+        <div class="text">暂无数据</div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.blog_index {
+  height: 100vh;
+  width: 100vw;
+  background-color: #050303a8;
+  padding-top: 30px;
+  overflow: auto;
+}
 .back {
   position: fixed;
   right: 20px;
@@ -70,35 +79,41 @@ getBlogList();
 .main-page {
   padding: 50px 50px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, calc(25% - 50px));
-  grid-column-gap: 50px;
+  grid-template-columns: repeat(auto-fill, calc(25% - 40px));
+  grid-column-gap: 40px;
   cursor: pointer;
 
   .ant-card {
-    font-size: 18px;
+    font-size: 20px;
     line-height: 22px;
     color: #fff6f6;
-    border-radius: 16px;
-    height: 95px;
+    border-radius: 22px;
+    height: 120px;
     font-family: sans-serif;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 
     :deep(.ant-card-body) {
-      padding: 32px 15px 0 90px;
+      padding: 25px 15px 0 130px;
     }
   }
 
   .blogging {
-    background: 15px 20px / 60px 60px no-repeat url(@/assets/blogging.png),
-      #3d0a57a8;
+    background: 10px 5px / 110px 110px no-repeat url(@/assets/blogging.png),
+      #313e39d6;
     .title {
       display: block;
       width: 100%;
-      white-space: nowrap;
+      // white-space: nowrap;
+      // overflow: hidden;
+      // text-overflow: ellipsis;
+      font-size: 20px;
+      font-family: fangsong;
+
       overflow: hidden;
       text-overflow: ellipsis;
-      font-size: 16px;
-      padding-bottom: 3px;
+      -webkit-line-clamp: 2;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
     }
     .tag {
       padding-left: 0px;

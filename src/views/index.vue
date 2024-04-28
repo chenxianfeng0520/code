@@ -198,64 +198,67 @@ function getBackground(data) {
     <PlusSquareOutlined />
     <span>新建博文</span>
   </button>
-  <div class="main-page">
-    <a-card
-      :bordered="false"
-      class="blog animate__animated animate__bounceIn"
-      :style="{
-        background: getBackground(item),
-      }"
-      v-for="item in blogList"
-      v-if="blogType == 'blog_front'"
-      v-show="!loading"
-    >
-      <div class="title">
-        <span class="name">{{ item.name }}</span>
-        <CheckCircleOutlined v-if="item.publish == 2" class="icon" />
-      </div>
-      <a-button type="link" @click.stop="onSee(item)">查看</a-button>
-      <a-button
-        type="link"
-        @click.stop="toPage(7, item)"
-        v-if="item.publish != 2"
-        >修改</a-button
+  <div class="page_index">
+    <div class="main-page">
+      <a-card
+        :bordered="false"
+        class="experiment animate__animated animate__bounceIn"
+        @click="toPage(1)"
+        v-if="lotteryType == 'lottery_front'"
       >
-      <a-button
-        type="link"
-        :class="{
-          publish: true,
-          publish_1: item.publish == 1,
-          publish_2: item.publish == 2,
+        <span>生成随机数</span>
+      </a-card>
+      <a-card
+        :bordered="false"
+        class="blog animate__animated animate__bounceIn"
+        :style="{
+          background: getBackground(item),
         }"
-        @click.stop="onPublish(item)"
-        >{{ publishList[item.publish] }}</a-button
+        :class="{ publish: item.publish == 2 }"
+        v-for="item in blogList"
+        v-if="blogType == 'blog_front'"
+        v-show="!loading"
       >
-      <a-button
-        type="link"
-        danger
-        class="delete"
-        @click.stop="onDelete(item)"
-        v-if="item.publish != 2"
-        >删除</a-button
+        <div class="title">
+          <span class="name">{{ item.name }}</span>
+          <CheckCircleOutlined v-if="item.publish == 2" class="icon" />
+        </div>
+        <a-button type="link" @click.stop="onSee(item)">查看</a-button>
+        <a-button
+          type="link"
+          @click.stop="toPage(7, item)"
+          v-if="item.publish != 2"
+          >修改</a-button
+        >
+        <a-button
+          type="link"
+          :class="{
+            publish: true,
+            publish_1: item.publish == 1,
+            publish_2: item.publish == 2,
+          }"
+          @click.stop="onPublish(item)"
+          >{{ publishList[item.publish] }}</a-button
+        >
+        <a-button
+          type="link"
+          danger
+          class="delete"
+          @click.stop="onDelete(item)"
+          v-if="item.publish != 2"
+          >删除</a-button
+        >
+      </a-card>
+      <a-card
+        :bordered="false"
+        class="minio animate__animated animate__bounceIn"
+        @click="toPage(6)"
+        v-if="minioType == 'minio_front'"
       >
-    </a-card>
-    <a-spin v-show="loading" />
-    <a-card
-      :bordered="false"
-      class="experiment animate__animated animate__bounceIn"
-      @click="toPage(1)"
-      v-if="lotteryType == 'lottery_front'"
-    >
-      <span>生成随机数</span>
-    </a-card>
-    <a-card
-      :bordered="false"
-      class="minio animate__animated animate__bounceIn"
-      @click="toPage(6)"
-      v-if="minioType == 'minio_front'"
-    >
-      <span>管理minio桶文件</span>
-    </a-card>
+        <span>文件管理</span>
+      </a-card>
+      <a-spin v-show="loading" />
+    </div>
   </div>
 </template>
 
@@ -303,7 +306,13 @@ function getBackground(data) {
   height: 30px;
   cursor: pointer;
 }
-
+.page_index {
+  height: 100vh;
+  width: 100vw;
+  background-color: #050303a8;
+  padding-top: 30px;
+  overflow: auto;
+}
 .main-page {
   padding: 50px 50px;
   display: grid;
@@ -327,7 +336,7 @@ function getBackground(data) {
 
   .experiment {
     background: 0px 10px / 110px 110px no-repeat url(@/assets/chouqian.png),
-      #2c2b2bf5;
+      #7b3e3ef5;
   }
 
   .suiji {
@@ -393,7 +402,7 @@ function getBackground(data) {
 
   .minio {
     background: 0px 25px / 90px 90px no-repeat url(@/assets/minio.png),
-      #2c2b2bf5;
+      #7b6133f5;
   }
 
   .excel {

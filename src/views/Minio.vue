@@ -62,7 +62,7 @@ function getConent(item) {
 }
 
 onMounted(() => {
-  cxf_Multiple("cxf", "cxf_button", activeList);
+  cxf_Multiple("cxf", "btn-danger", activeList);
 });
 </script>
 
